@@ -1,0 +1,36 @@
+<template>
+  <tn-dialog data-cy="team-help-dialog">
+    <tn-dialog-header>
+      <h2 class="h2" title="Collections">Teams, sharing is caring</h2>
+    </tn-dialog-header>
+    <tn-dialog-body>
+      <div class="help-dialog__content">
+        <figure>
+          <img
+            class="help-dialog__illustration"
+            alt="Figure representing teams"
+            src="/images/undraw_connecting_teams.svg"
+          />
+        </figure>
+        <tn-p>
+          Here you can create and maintain existing teams by adding new users with different levels
+          of access. Collections can be associated with a team which gives access to given
+          collections to team members.
+        </tn-p>
+      </div>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button data-cy="team-help-dialog-cancel" flat click.delegate="cancel()"
+        >${cancelButtonText}</tn-button
+      >
+      <tn-button
+        data-cy="team-help-dialog-confirm"
+        focus-element
+        primary
+        raised
+        click.delegate="accept()"
+        >${acceptButtonText}</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

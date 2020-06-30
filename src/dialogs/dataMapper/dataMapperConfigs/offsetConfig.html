@@ -1,0 +1,9 @@
+<template>
+  <require from="valueConverters/toInt"></require>
+  <tn-input
+    floating-label
+    label="Offset number (can be negative)"
+    name="offset-number"
+    value.bind="mapper.offset | toInt"
+  ></tn-input>
+</template>

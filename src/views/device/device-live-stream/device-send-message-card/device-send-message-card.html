@@ -1,0 +1,61 @@
+<template class="device-stream-card">
+  <require from="./device-send-message-card.scss"></require>
+  <require from="valueConverters/toInt"></require>
+  <tn-card>
+    <tn-card-header>
+      <tn-card-title>Send message to device</tn-card-title>
+    </tn-card-header>
+    <tn-card-body>
+      <form class="device-send-message-card__message-panel-form" submit.trigger="sendMessage()">
+        <tn-card-body-heading>Message type</tn-card-body-heading>
+        <tn-select inline label="Message type" name="message-type" value.bind="messageType">
+          <option selected value="UDP">UDP</option>
+          <option value="COAP">COAP</option>
+        </tn-select>
+        <tn-card-body-heading>Message details</tn-card-body-heading>
+        <tn-input
+          inline
+          floating-label
+          class="device-send-message-card__message-panel-item"
+          value.bind="deviceMessage"
+          name="message-payload"
+          label="Message payload"
+        ></tn-input>
+        <tn-input
+          show.bind="messageType === 'COAP'"
+          inline
+          floating-label
+          class="device-send-message-card__message-panel-item"
+          value.bind="deviceCoapPath"
+          name="coap-path"
+          label="Coap path"
+        ></tn-input>
+        <tn-input
+          inline
+          floating-label
+          type="number"
+          class="device-send-message-card__message-panel-item"
+          value.bind="deviceMessagePort | toInt"
+          name="message-port"
+          label="Port"
+        ></tn-input>
+        <div>
+          <tn-checkbox
+            class="device-send-message-card__message-panel-item"
+            checked.bind="deviceMessageEncodeBase64"
+            name="message-encode-base64"
+            label="Encode payload"
+          ></tn-checkbox>
+        </div>
+        <tn-button
+          primary
+          raised
+          click.delegate="sendMessage()"
+          type="submit"
+          loading.bind="loading"
+          >Send message</tn-button
+        >
+      </form>
+    </tn-card-body>
+  </tn-card>
+</template>

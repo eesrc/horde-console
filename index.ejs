@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#007ace">
+  <base href="/">
+  <meta name="description" content="Telenor NB-IoT Developer portal. Where you get your NB-IoT on." />
+  <meta name="keywords" content="nbiot,nb-iot,developer portal,telenor iot,iot" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://nbiot.engineering/images/og_image.png" />
+  <meta name="twitter:title" content="Telenor NB-IoT Developer portal" />
+  <meta name="twitter:description" content="Telenor NB-IoT Developer portal. Where you get your NB-IoT on." />
+  <meta name="twitter:site" content="@exploratoryeng" />
+  <meta property="og:title" content="Telenor NB-IoT Developer portal" />
+  <meta property="og:site_name" content="Telenor NB-IoT Developer portal" />
+  <meta property="og:url" content="https://nbiot.engineering" />
+  <meta property="og:image" content="https://nbiot.engineering/images/og_image.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Telenor NB-IoT Developer portal. Where you get your NB-IoT on." />
+  <script>
+    window.nbiotVersion = "${ htmlWebpackPlugin.options.metadata.buildVersion }";
+  </script>
+  <style>
+    .splash-container {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transition: opacity .75s cubic-bezier(.15, .99, .18, 1.01);
+      background: linear-gradient(45deg, #006bb5 0%, #007ace 100%);
+      opacity: 1;
+    }
+
+    .splash-container--fade-out {
+      opacity: 0;
+    }
+
+    .splash {
+      box-sizing: border-box;
+      margin: 10% 0 0 0;
+      font-family: Helvetica, Arial, sans-serif;
+      text-align: center;
+    }
+
+    .splash__message {
+      color: #fff;
+      font-size: 72px;
+      line-height: 72px;
+      text-transform: uppercase;
+    }
+
+    .splash__logo {
+      display: inline-block;
+      width: 120px;
+      margin: 24px;
+    }
+  </style>
+  <% if (htmlWebpackPlugin.options.metadata.production) { %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${ htmlWebpackPlugin.options.metadata.googleAnalytics }"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '${ htmlWebpackPlugin.options.metadata.googleAnalytics }', { 'anonymize_ip': true });
+  </script>
+  <script type="text/javascript">
+    window._trackJs = {
+      token: "${ htmlWebpackPlugin.options.metadata.trackJs.token }",
+      application: "${ htmlWebpackPlugin.options.metadata.trackJs.application }",
+      network: {
+        enabled: false,
+        error: true
+      },
+      version: "${ htmlWebpackPlugin.options.metadata.buildVersion }",
+      onError: function (payload) {
+        payload.network = payload.network.filter(function (item) {
+          if (item.statusCode !== 400 && item.statusCode !== 401) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        });
+
+        return true;
+      }
+    };
+  </script>
+  <% } %>
+  <link rel="preload" href="/images/telenorlogo-white.svg" as="image" type="image/svg+xml">
+  <link rel="preload" href="/fonts/roboto-v18-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-300.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-500.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-700.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/roboto-v18-latin-regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/MaterialIcons-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/MaterialIcons-Regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+  <link rel='icon' href='/favicon.png' type='image/x-icon' />
+  <title>
+    <%- htmlWebpackPlugin.options.metadata.title %>
+  </title>
+  <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+  <!-- imported CSS are concatenated and added automatically -->
+</head>
+
+<body class="body">
+  <div aurelia-app="main" class="app"></div>
+  <div class="splash-container">
+    <div class="splash">
+      <div class="splash__message">
+        <%- htmlWebpackPlugin.options.metadata.title %>
+      </div>
+      <div class="splash__logo">
+        <img src="/images/telenorlogo-white.svg" alt="telenorlogo" />
+      </div>
+    </div>
+  </div>
+  <% if (htmlWebpackPlugin.options.metadata.production) { %>
+  <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+  <% } %>
+  <script type="text/javascript" integrity="sha256-+u54FaX9J+k40eAcg5K2YzICSQjrEYBI9gju5nE3HfY=" crossorigin="anonymous"
+    src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <% if (htmlWebpackPlugin.options.metadata.server) { %>
+  <!-- Webpack Dev Server reload -->
+  <script src="/webpack-dev-server.js"></script>
+  <% } %>
+</body>
+
+</html>

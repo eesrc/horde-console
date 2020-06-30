@@ -1,0 +1,28 @@
+<template>
+  <td class="table__data table__data">${ member.name }</td>
+  <td class="table__data table__data">${ member.email }</td>
+  <td class="table__data table__data">
+    <div if.bind="isSelf || !isAdmin">${ member.role }</div>
+    <div if.bind="!isSelf && isAdmin">
+      <tn-select
+        compact
+        label="Member role"
+        name="member-role"
+        value.bind="member.role"
+        values.bind="availableRoles"
+      ></tn-select>
+    </div>
+  </td>
+  <td class="table__data table__data table__data--action-column">
+    <div if.bind="!isSelf && isAdmin">
+      <tn-dropdown transform-top-right>
+        <tn-dropdown-title>
+          <tn-icon no-margin>more_vert</tn-icon>
+        </tn-dropdown-title>
+        <tn-dropdown-container>
+          <tn-dropdown-item click.delegate="removeMember(member)">Remove member</tn-dropdown-item>
+        </tn-dropdown-container>
+      </tn-dropdown>
+    </div>
+  </td>
+</template>

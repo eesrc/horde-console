@@ -1,0 +1,19 @@
+<template bindable="router, collection">
+  <require from="valueConverters/tagName"></require>
+  <tn-breadcrumb>
+    <tn-breadcrumb-item route="collection-overview" title="Collections"></tn-breadcrumb-item>
+    <tn-breadcrumb-item title="${ collection | tagName }"></tn-breadcrumb-item>
+  </tn-breadcrumb>
+  <h1 class="h1 h1--secondary">
+    ${ collection | tagName }
+  </h1>
+  <tn-nav>
+    <tn-nav-item
+      repeat.for="row of router.navigation"
+      active.bind="row.isActive"
+      title.bind="row.title"
+      route.bind="row.config.name"
+      params.bind="{ collectionId: collection.id }"
+    ></tn-nav-item>
+  </tn-nav>
+</template>

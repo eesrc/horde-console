@@ -1,0 +1,98 @@
+/*
+	Copyright 2018 Telenor Digital AS
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+*/
+
+@import "variables/grid";
+@import "variables/colors";
+@import "setup/typography";
+
+.device-message-entry {
+  display: block;
+  margin-top: $grid-size;
+  padding: 2 * $grid-size;
+  background-color: $color-grey-theme--light;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__heading {
+    display: inline-block;
+    margin-right: 3 * $grid-size;
+    font-size: $font-size--16;
+    font-weight: bold;
+
+    &--secondary {
+      color: $font-color-secondary;
+      font-weight: normal;
+    }
+  }
+
+  &__heading-details {
+    display: inline-block;
+    margin-right: 3 * $grid-size;
+    color: $font-color-secondary;
+    font-size: $font-size--14;
+  }
+
+  &__heading-more-code {
+    display: inline-block;
+    margin-right: 2 * $grid-size;
+    font-size: $font-size--16;
+  }
+
+  &__heading-actions {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  &__data {
+    display: none;
+    padding-top: $grid-size * 2;
+
+    &--expanded {
+      display: block;
+    }
+  }
+
+  &__data-group {
+    display: flex;
+    padding: $grid-size 0;
+    border-bottom: solid 2px $font-color-dividers;
+  }
+
+  &__data-name {
+    width: 25%;
+    min-width: 80px;
+    font-weight: $font-weight--bold;
+  }
+
+  &__data-value {
+    flex: 1;
+    color: $font-color-secondary;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,18 @@
+<template>
+  <require from="valueConverters/toInt"></require>
+  <tn-input
+    floating-label
+    label="Host"
+    help-text="Host name (my-udp.example.com) or IP address (192.0.2.1) of host."
+    name="udp-host"
+    value.bind="output.config.host"
+  ></tn-input>
+  <tn-input
+    floating-label
+    label="Port"
+    type="number"
+    help-text="Port number for UDP listener on the remote host"
+    name="udp-port"
+    value.bind="output.config.port | toInt"
+  ></tn-input>
+</template>

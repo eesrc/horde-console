@@ -1,0 +1,47 @@
+<template>
+  <main-container>
+    <require from="./team-expansion-panel/team-expansion-panel"></require>
+    <tn-card>
+      <tn-card-header>
+        <tn-card-title>Redeem invite code</tn-card-title>
+      </tn-card-header>
+      <tn-card-body>
+        If you have received an invite code, you can redeem it here by clicking redeem invite code.
+      </tn-card-body>
+      <tn-card-actions align-right>
+        <tn-button data-cy="redeem-team-invite" flat click.delegate="redeemTeamInviteCode()"
+          >Redeem invite code</tn-button
+        >
+      </tn-card-actions>
+    </tn-card>
+    <tn-card>
+      <tn-card-header>
+        <tn-card-title>Team overview</tn-card-title>
+      </tn-card-header>
+      <tn-card-body>
+        <tn-p>
+          Here you will find your teams connected to your account. You can manage the teams you own
+          by adding and removing users or by deleting a team in its entirety. Your private team is
+          only available for you and can't have invites created for it.
+        </tn-p>
+        <tn-p>
+          A team consists of one or more collections, which again consists of one or more devices
+          and outputs. The team members will be able to access all resources within the team, but
+          can only edit or delete the resources if the member has admin privileges.
+        </tn-p>
+      </tn-card-body>
+      <tn-card-actions align-right>
+        <tn-button data-cy="create-new-team" flat click.delegate="createNewTeam()"
+          >Create new team</tn-button
+        >
+      </tn-card-actions>
+    </tn-card>
+    <team-expansion-panel
+      edit-callback.call="editTeam(team)"
+      delete-callback.call="deleteTeam(team)"
+      repeat.for="team of teams"
+      team.bind="team"
+      open.bind="team.id === selectedTeam"
+    ></team-expansion-panel>
+  </main-container>
+</template>

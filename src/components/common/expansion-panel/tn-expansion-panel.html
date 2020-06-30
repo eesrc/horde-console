@@ -1,0 +1,21 @@
+<template
+  class="
+  tn-expansion-panel
+  ${ active ? 'tn-expansion-panel--expanded' : '' }
+"
+>
+  <require from="./tn-expansion-panel.scss"></require>
+  <div class="tn-expansion-panel__header" click.delegate="toggle($event)">
+    <slot name="expansion-panel-title">Untitled</slot>
+    <slot name="expansion-panel-subtitle"></slot>
+    <span class="tn-expansion-panel__chevron">
+      <tn-button flat icon click.delegate="toggle($event)">
+        <tn-icon no-margin>${ active ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }</tn-icon>
+      </tn-button>
+    </span>
+  </div>
+  <div show.bind="active">
+    <slot name="expansion-panel-body">Fallback body</slot>
+    <slot name="expansion-panel-footer">Fallback footer</slot>
+  </div>
+</template>

@@ -1,0 +1,126 @@
+/*
+	Copyright 2018 Telenor Digital AS
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+*/
+@import "setup/typography";
+@import "mixins/responsive";
+@import "variables/grid";
+@import "variables/animations";
+@import "variables/colors";
+
+$expansion-panel-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+$expansion-panel-transition: background 0.5s $animation-cubic-bezier-1,
+  max-height 0.5s $animation-cubic-bezier-1, margin 0.25s $animation-cubic-bezier-1;
+
+.tn-expansion-panel {
+  display: block;
+  max-height: $grid-size * 8;
+  margin: 0;
+  transition: $expansion-panel-transition;
+  background-color: $color--white;
+  box-shadow: $expansion-panel-box-shadow;
+  overflow: hidden;
+
+  &--expanded {
+    max-height: 2000px;
+    margin: $grid-size * 2 0;
+
+    &:first-of-type {
+      margin: 0 0 $grid-size * 2 0;
+    }
+
+    &:last-of-type {
+      margin: $grid-size * 2 0 0 0;
+    }
+
+    &:only-of-type {
+      margin: 0;
+    }
+
+    .expansion-panel__header {
+      :focus {
+        background-color: $color--white;
+      }
+    }
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  &__header {
+    display: flex;
+    height: $grid-size * 8;
+    padding: 0 $grid-size * 3;
+    outline: none;
+    line-height: $grid-size * 8;
+    cursor: pointer;
+
+    &:active {
+      background-color: $color--google-grey-200;
+    }
+  }
+
+  &__title {
+    width: 200px;
+    margin-right: $grid-size * 2;
+    font-size: $font-size--20;
+    font-weight: $font-weight--light;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__subtitle {
+    flex-grow: 1;
+    color: $font-color-secondary;
+    font-size: $font-size--16;
+    font-weight: $font-weight--regular;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__chevron {
+    align-self: flex-end;
+    margin-left: auto;
+    color: $font-color-opacity--black-38;
+    line-height: 50px;
+  }
+
+  &__body {
+    display: block;
+    padding: 0 $grid-size * 3 $grid-size * 2;
+
+    @include desktop {
+      display: flex;
+    }
+
+    &--column {
+      flex-direction: column;
+    }
+  }
+
+  &__body-section {
+    width: 100%;
+
+    @include desktop {
+      width: 50%;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: $grid-size * 2 $grid-size $grid-size * 2 $grid-size * 3;
+    border-top: 1px solid $color--google-grey-200;
+  }
+}

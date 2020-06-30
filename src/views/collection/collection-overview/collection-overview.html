@@ -1,0 +1,80 @@
+<template>
+  <require from="./collection-overview.scss"></require>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/sort"></require>
+  <main-container>
+    <tn-grid class="au-stagger">
+      <div
+        class="au-animate animate-fade-in animate-fade-out"
+        data-cy="team-collection"
+        repeat.for="team of teamCollections | sort:'tags.name':'asc'"
+      >
+        <tn-grid-row>
+          <tn-grid-item grid-size="12">
+            <div class="collections__separator">
+              <h2 class="collections__separator-title">
+                <a
+                  data-cy="team"
+                  route-href="route: team-overview; params.bind: { teamId: team.id }"
+                  >Team: ${ team | tagName } (${team.id})</a
+                >
+              </h2>
+            </div>
+          </tn-grid-item>
+        </tn-grid-row>
+        <div class="collections__container">
+          <div
+            data-cy="collection"
+            class="collection__container"
+            repeat.for="collection of filterCollectionsByTeamId(team.id) | sort:'tags.name':'asc'"
+          >
+            <a
+              class="collection-card tn-card tn-card--selectable"
+              route-href="route: collection-details; params.bind: { collectionId: collection.id }"
+            >
+              <tn-card-header>
+                <tn-card-title
+                  ><span title="${ collection | tagName }"
+                    >${ collection | tagName }</span
+                  ></tn-card-title
+                >
+              </tn-card-header>
+            </a>
+            <tn-dropdown class="collection-card__dropdown" transform-top-right>
+              <tn-dropdown-title>
+                <i
+                  data-cy="collection-dropdown"
+                  class="material-icons collection-card__dropdown-title dropdown__icon dropdown__icon--colored"
+                  >more_vert</i
+                >
+              </tn-dropdown-title>
+              <tn-dropdown-container>
+                <tn-dropdown-item
+                  data-cy="edit-collection"
+                  click.delegate="editCollection(collection)"
+                  >Edit</tn-dropdown-item
+                >
+                <tn-dropdown-item
+                  data-cy="delete-collection"
+                  click.delegate="deleteCollection(collection)"
+                  >Delete</tn-dropdown-item
+                >
+              </tn-dropdown-container>
+            </tn-dropdown>
+          </div>
+          <button
+            data-cy="create-new-collection"
+            click.delegate="createNewCollection(team.id)"
+            as-element="tn-card"
+            selectable
+            class="collection-card collection-card--new"
+          >
+            <tn-card-body centered>
+              <h3 class="h3">Create new collection</h3>
+            </tn-card-body>
+          </button>
+        </div>
+      </div>
+    </tn-grid>
+  </main-container>
+</template>

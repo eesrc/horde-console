@@ -1,0 +1,124 @@
+<template>
+  <require from="./login.scss"></require>
+  <section class="landing-page">
+    <div class="landing-page__hero" id="particles-js">
+      <div class="landing-page__hero-section">
+        <h1 class="h1 landing-page__main-header">Telenor IoT Developer Portal</h1>
+        <div class="landing-page__sub-header">
+          Get started now
+        </div>
+        <div class="landing-page__login-providers">
+          <a
+            class="landing-page__login-provider"
+            data-cy="login-connect-link"
+            click.trigger="loginConnect()"
+          >
+            <img
+              class="landing-page__login-button"
+              src="/images/connect_button.png"
+              alt="Log in with CONNECT"
+            />
+          </a>
+          <a
+            class="landing-page__login-provider"
+            data-cy="login-github-link"
+            click.trigger="loginGithub()"
+            ><img
+              class="landing-page__login-button"
+              src="/images/GitHubSigninButton.png"
+              alt="Log in with GitHub"
+          /></a>
+        </div>
+      </div>
+    </div>
+    <div class="landing-page__main-section">
+      <div class="landing-page__main-section-container">
+        <tn-grid>
+          <tn-grid-row>
+            <tn-grid-item grid-size="6">
+              <div class="landing-page__highlight">
+                <h2 class="landing-page__highlight-header">Self service</h2>
+                <p>
+                  No interaction with us unless you want to. Manage your applications, devices and
+                  API tokens at your pace.
+                </p>
+                <tn-button data-cy="details-login-button" flat click.delegate="loginConnect()"
+                  >Log in to dashboard<tn-icon right>arrow_forward</tn-icon>
+                </tn-button>
+              </div>
+            </tn-grid-item>
+            <tn-grid-item grid-size="6">
+              <img
+                class="img landing-page__highlight-illustration"
+                src="/images/undraw_coding.svg"
+              />
+            </tn-grid-item>
+          </tn-grid-row>
+          <tn-grid-row>
+            <tn-grid-item grid-size="6">
+              <img
+                class="img landing-page__highlight-illustration"
+                src="/images/undraw_file_searching.svg"
+              />
+            </tn-grid-item>
+            <tn-grid-item grid-size="6">
+              <div class="landing-page__highlight">
+                <h2 class="landing-page__highlight-header">
+                  Open documentation
+                </h2>
+                <p>
+                  All our documentation is open sourced and maintained continously. It covers the
+                  API and how our backend works making it easy for you to integrate.
+                </p>
+                <tn-button data-cy="details-docs-button" flat click.delegate="goToDocs()"
+                  >Go to documentation<tn-icon right>arrow_forward</tn-icon></tn-button
+                >
+              </div>
+            </tn-grid-item>
+          </tn-grid-row>
+          <tn-grid-row>
+            <tn-grid-item grid-size="6">
+              <div class="landing-page__highlight">
+                <h2 class="landing-page__highlight-header">Tutorials</h2>
+                <p>
+                  Getting started can be hard. That's why we created several tutorials for you to
+                  easily get started with your device. Everything is open sourced and we create new
+                  tutorials based on feedback.
+                </p>
+                <tn-button data-cy="details-tutorials-button" flat click.delegate="goToTutorials()"
+                  >Go to tutorials<tn-icon right>arrow_forward</tn-icon></tn-button
+                >
+              </div>
+            </tn-grid-item>
+            <tn-grid-item grid-size="6">
+              <img
+                class="img landing-page__highlight-illustration"
+                src="/images/undraw_mission_impossible.svg"
+              />
+            </tn-grid-item>
+          </tn-grid-row>
+          <tn-grid-row>
+            <tn-grid-item grid-size="6">
+              <img
+                class="img landing-page__highlight-illustration"
+                src="/images/undraw_successful_purchase.svg"
+              />
+            </tn-grid-item>
+            <tn-grid-item grid-size="6">
+              <div class="landing-page__highlight">
+                <h2 class="landing-page__highlight-header">Shop</h2>
+                <p>
+                  We sell modules which is designed by us for both prototyping and production. Scale
+                  and prototype at your pace.
+                </p>
+                <tn-button flat data-cy="details-shop-button" click.delegate="goToShop()"
+                  >Go to webshop<tn-icon right>arrow_forward</tn-icon></tn-button
+                >
+              </div>
+            </tn-grid-item>
+          </tn-grid-row>
+        </tn-grid>
+      </div>
+    </div>
+  </section>
+</template>

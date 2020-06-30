@@ -1,0 +1,48 @@
+<template>
+  <tn-dialog>
+    <tn-dialog-sidebar>
+      <h2 class="h2">${headerText}</h2>
+      <tn-dialog-sidebar-text>
+        A device needs an IMSI and IMEI to properly be registered within the IoT platform. It can be
+        found either on the module or by using AT-commands.
+      </tn-dialog-sidebar-text>
+    </tn-dialog-sidebar>
+    <tn-dialog-body>
+      <form class="form" submit.delegate="submitDevice()">
+        <tn-form-error form-error.bind="formError"></tn-form-error>
+        <tn-input
+          help-text="The name can be changed at any time."
+          floating-label
+          focus-element
+          name="device-name"
+          label="Device name (optional)"
+          value.bind="device.tags.name"
+        ></tn-input>
+        <tn-input
+          error-text.bind="imsiError"
+          help-text="Required. IMSI is a number can be found on your device."
+          floating-label
+          type="number"
+          name="device-imsi"
+          label="IMSI"
+          value.bind="device.imsi"
+        ></tn-input>
+        <tn-input
+          error-text.bind="imeiError"
+          help-text="Required. IMEI is a number that can be found on your device."
+          floating-label
+          type="number"
+          name="device-imei"
+          label="IMEI"
+          value.bind="device.imei"
+        ></tn-input>
+      </form>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button flat click.delegate="dialogController.cancel()">Cancel</tn-button>
+      <tn-button primary raised loading.bind="loading" click.delegate="submitDevice()"
+        >${confirmButtonText}</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

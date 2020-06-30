@@ -1,0 +1,104 @@
+<template
+  class="
+  top-header
+  ${ router.currentInstruction.config.name === 'login' ? 'top-header--transparent' : '' }
+  "
+  bindable="router"
+>
+  <require from="./nav-header.scss"></require>
+  <require from="components/common/profile-dropdown/profile-dropdown"></require>
+  <require from="components/common/svg/propeller.html"></require>
+  <require from="components/common/svg/white-propeller.html"></require>
+  <require from="components/search-bar/search-bar"></require>
+  <h1 class="top-header__heading">
+    <a href="/">Telenor NB-IoT</a>
+    <span class="top-header__logo">
+      <propeller if.bind="router.currentInstruction.config.name !== 'login'"></propeller>
+      <white-propeller
+        if.bind="router.currentInstruction.config.name === 'login'"
+      ></white-propeller>
+    </span>
+    <span class="top-header__beta">BETA</span>
+  </h1>
+  <nav
+    class="top-header__main-nav"
+    if.bind="
+    router.currentInstruction.config.name !== 'login' &&
+    router.currentInstruction.config.name !== 'cookies-and-legal'
+  "
+  >
+    <a
+      repeat.for="row of router.navigation"
+      class="
+      hidden-phone
+      top-header__main-nav-entry
+      ${row.isActive ? 'top-header__main-nav-entry--selected' : ''}
+      "
+      href.bind="row.href"
+      >${row.title}</a
+    >
+  </nav>
+  <nav
+    class="top-header__main-nav hidden-phone"
+    if.bind="router.currentInstruction.config.name === 'login'"
+  >
+    <a
+      data-cy="docs-link"
+      rel="noopener"
+      target="_blank"
+      class="top-header__main-nav-entry top-header__main-nav-entry--transparent"
+      href="https://docs.nbiot.engineering"
+      >Documentation</a
+    >
+    <a
+      data-cy="tutorial-link"
+      rel="noopener"
+      target="_blank"
+      class="top-header__main-nav-entry top-header__main-nav-entry--transparent"
+      href="https://docs.nbiot.engineering/tutorials"
+      >Tutorials</a
+    >
+    <a
+      data-cy="shop-link"
+      rel="noopener"
+      target="_blank"
+      class="top-header__main-nav-entry top-header__main-nav-entry--transparent"
+      href="https://shop.exploratory.engineering"
+      >Shop</a
+    >
+  </nav>
+  <search-bar
+    class="hidden-phone"
+    if.bind="
+    router.currentInstruction.config.name !== 'login' &&
+    router.currentInstruction.config.name !== 'cookies-and-legal'
+  "
+  ></search-bar>
+  <nav class="top-header__icon-nav" if.bind="router.currentInstruction.config.name !== 'login'">
+    <a class="hidden-phone" href="https://docs.nbiot.engineering" rel="noopener" target="_blank">
+      <tn-icon clickable center>description</tn-icon>
+    </a>
+    <profile-dropdown
+      if.bind="router.currentInstruction.config.name !== 'cookies-and-legal'"
+    ></profile-dropdown>
+    <div class="visible-phone inline">
+      <tn-dropdown class="top-header__dropdown-nav" dropdown-position="below" transform-top-right>
+        <tn-dropdown-title>
+          <tn-icon clickable center no-margin>menu</tn-icon>
+        </tn-dropdown-title>
+        <tn-dropdown-container>
+          <tn-dropdown-item repeat.for="row of router.navigation">
+            <a
+              class="
+              top-header__main-nav-entry
+              ${row.isActive ? 'top-header__main-nav-entry--selected' : ''}
+              "
+              href.bind="row.href"
+              >${row.title}</a
+            >
+          </tn-dropdown-item>
+        </tn-dropdown-container>
+      </tn-dropdown>
+    </div>
+  </nav>
+</template>

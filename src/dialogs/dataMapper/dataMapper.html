@@ -1,0 +1,35 @@
+<template class="data-mapper">
+  <require from="valueConverters/stringify"></require>
+  <require from="./dataMapper.scss"></require>
+  <require from="./dataMapperConfigs/chunkConfig"></require>
+  <require from="./dataMapperConfigs/hexToFloatConfig"></require>
+  <require from="./dataMapperConfigs/hexToIntConfig"></require>
+  <require from="./dataMapperConfigs/offsetConfig"></require>
+  <require from="./dataMapperConfigs/base64Config"></require>
+  <require from="./dataMapperConfigs/fromJsonConfig"></require>
+  <h3 class="h3">${dataMapper.name}</h3>
+  <chunk-config
+    if.bind="dataMapper.config().id === 'CHUNK'"
+    mapper.bind="dataMapper"
+  ></chunk-config>
+  <hex-to-float-config
+    if.bind="dataMapper.config().id === 'HEXTOFLOAT'"
+    mapper.bind="dataMapper"
+  ></hex-to-float-config>
+  <hex-to-int-config
+    if.bind="dataMapper.config().id === 'HEXTOINT'"
+    mapper.bind="dataMapper"
+  ></hex-to-int-config>
+  <offset-config
+    if.bind="dataMapper.config().id === 'OFFSET'"
+    mapper.bind="dataMapper"
+  ></offset-config>
+  <base64-config
+    if.bind="dataMapper.config().id ==='BASE64'"
+    mapper.bind="dataMapper"
+  ></base64-config>
+  <from-json-config
+    if.bind="dataMapper.config().id ==='FROMJSON'"
+    mapper.bind="dataMapper"
+  ></from-json-config>
+</template>

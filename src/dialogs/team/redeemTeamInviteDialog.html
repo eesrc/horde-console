@@ -1,0 +1,30 @@
+<template>
+  <tn-dialog>
+    <tn-dialog-sidebar>
+      <h2 class="h2">Redeem your team invite</h2>
+      <tn-dialog-sidebar-text>
+        You can obtain a team invite by someone who has an existing team and clicks
+        <em>Create new invite</em> in the team dropdown.
+      </tn-dialog-sidebar-text>
+    </tn-dialog-sidebar>
+    <tn-dialog-body>
+      <form class="form" submit.trigger="redeemTeamCode()">
+        <tn-input
+          focus-element
+          floating-label
+          name="redeem-code"
+          error-text.bind="redeemCodeError"
+          value.bind="redeemCode"
+          label="Redeem code"
+          help-text="The code you want to redeem for team access"
+        ></tn-input>
+      </form>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button flat click.delegate="cancel()">Cancel</tn-button>
+      <tn-button primary floating loading.bind="loading" click.delegate="redeemTeamCode()"
+        >Redeem code</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

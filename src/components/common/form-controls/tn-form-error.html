@@ -1,0 +1,7 @@
+<template>
+  <require from="./tn-form-error.scss"></require>
+  <div class="tn-form-errors" if.bind="formError">
+    <!-- <span class="tn-form-errors__heading">Something went wrong when submitting the form:</span> -->
+    <span class="tn-form-errors__error">${formError}</span>
+  </div>
+</template>

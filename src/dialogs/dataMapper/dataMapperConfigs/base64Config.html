@@ -1,0 +1,10 @@
+<template>
+  <tn-select label="Base 64 action" value.bind="mapper.action">
+    <option value="decode">Decode</option>
+    <option value="encode">Encode</option>
+  </tn-select>
+  <tn-select label="Decode as" value.bind="mapper.decodeAs">
+    <option value="string">String</option>
+    <option value="hexstring">Hex</option>
+  </tn-select>
+</template>

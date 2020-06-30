@@ -1,0 +1,11 @@
+@import "variables/grid";
+
+.device-send-message-card {
+  &__message-panel-form {
+    margin-bottom: $grid-size * 2;
+  }
+
+  &__message-panel-item {
+    margin-right: $grid-size;
+  }
+}

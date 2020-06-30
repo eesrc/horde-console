@@ -1,0 +1,24 @@
+<template>
+  <require from="./tn-spinner.scss"></require>
+  <svg
+    class="tn-spinner"
+    width="${spinner.size}"
+    height="${spinner.size}"
+    viewBox="${spinner.viewBox}"
+  >
+    <circle
+      class="
+      tn-spinner__path
+      ${ hasProp('colored') ? 'tn-spinner__path--colored' : '' }
+      ${ hasProp('small') ? 'tn-spinner__path--small' : ''}
+      ${ hasProp('large') ? 'tn-spinner__path--large' : ''}
+      "
+      fill="none"
+      stroke-width.bind="strokeWidth"
+      stroke-linecap="round"
+      cx="${spinner.circle.x}"
+      cy="${spinner.circle.y}"
+      r="${spinner.circle.r}"
+    ></circle>
+  </svg>
+</template>

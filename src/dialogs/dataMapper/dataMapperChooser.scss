@@ -1,0 +1,38 @@
+@import "variables/grid";
+@import "variables/colors";
+@import "mixins/responsive";
+@import "setup/typography";
+
+.data-mapper-chooser {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__mapper {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: $grid-size * 2;
+    padding: $grid-size * 2;
+    border: solid 1px $color--google-grey-200;
+    background-color: $color-grey-theme--light;
+    text-align: left;
+    cursor: pointer;
+
+    @include desktop {
+      width: 48%;
+    }
+
+    &:hover,
+    &:active {
+      border: solid 1px $color-grey-theme--dark;
+    }
+  }
+
+  &__mapper-heading {
+    font-size: $font-size--20;
+  }
+
+  &__mapper-description {
+    font-weight: $font-weight--light;
+  }
+}

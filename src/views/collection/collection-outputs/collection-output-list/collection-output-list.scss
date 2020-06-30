@@ -1,0 +1,30 @@
+@import "variables/grid";
+@import "variables/colors";
+@import "setup/typography";
+
+.collection-output {
+  &__status {
+    &--enabled {
+      color: $color--green;
+    }
+
+    &--disabled {
+      color: $color--red;
+    }
+  }
+
+  &__heading {
+    margin-bottom: $grid-size;
+    color: $font-color-secondary;
+    font-size: $font-size--15;
+    font-weight: 500;
+  }
+
+  &__config-value {
+    margin-bottom: $grid-size * 2;
+  }
+
+  &__toggle-button {
+    margin-right: auto;
+  }
+}

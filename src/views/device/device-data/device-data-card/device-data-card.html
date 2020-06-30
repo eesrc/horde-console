@@ -1,0 +1,74 @@
+<template>
+  <require from="./device-data-card.scss"></require>
+  <require from="valueConverters/timeAgo"></require>
+  <require from="valueConverters/dateFormat"></require>
+  <require from="valueConverters/base64"></require>
+  <require from="valueConverters/stringify"></require>
+  <require from="components/common/pagination/pagination"></require>
+  <tn-card>
+    <tn-card-header table>
+      <tn-card-title>Device data</tn-card-title>
+      <tn-card-header-actions>
+        <span class="device-data-card__decoding-description">Decoding</span>
+        <tn-select
+          compact
+          name="selectedDecodeAction"
+          label="Decode as"
+          value.bind="selectedDecodeAction"
+        >
+          <option value="none">No decoding</option>
+          <option value="string">Decode as string</option>
+          <option value="hex">Decode as hex</option>
+        </tn-select>
+      </tn-card-header-actions>
+    </tn-card-header>
+    <tn-card-body no-padding full-height>
+      <div class="device-data-card__container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="table__head-data">Type</th>
+              <th class="device-data-card__date-column table__head-data">Received</th>
+              <th class="table__head-data">Payload</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr repeat.for="deviceMessage of filteredDeviceMessages">
+              <td class="table__data">
+                ${deviceMessage.transport.toUpperCase()}:${getTransportMeta(deviceMessage)}
+              </td>
+              <td
+                class="table__data"
+                title="${ deviceMessage.received | timeAgo & signal:'updateTime' }"
+              >
+                ${ deviceMessage.received | dateFormat }
+              </td>
+              <td class="table__data" title="${deviceMessage.payload}">
+                <pre
+                  class="device-data-card__message-payload"
+                  if.bind="selectedDecodeAction !== 'none'"
+                >
+${ deviceMessage.payload | base64:"decode":selectedDecodeAction | stringify}</pre
+                >
+                <pre
+                  class="device-data-card__message-payload"
+                  if.bind="selectedDecodeAction === 'none'"
+                >
+${ deviceMessage.payload }</pre
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </tn-card-body>
+    <tn-card-actions align-right>
+      <pagination
+        if.bind="deviceMessages.length > 0"
+        rows-pr-page="10"
+        filter-callback.call="filteredDeviceMessagesCallback(filteredCollection)"
+        collection.bind="deviceMessages"
+      ></pagination>
+    </tn-card-actions>
+  </tn-card>
+</template>

@@ -1,0 +1,38 @@
+<template>
+  <require from="./device-details-card/device-details-card"></require>
+  <require from="./device-graph-card/device-graph-card"></require>
+  <require from="../device-heading.html"></require>
+  <require from="components/tag/tag-entity-map-card/tag-entity-map-card"></require>
+  <main-container>
+    <device-heading
+      router.bind="router"
+      device.bind="device"
+      collection.bind="collection"
+    ></device-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="6">
+          <device-details-card
+            edit-callback.call="editDevice(device)"
+            delete-callback.call="deleteDevice(device)"
+            device.bind="device"
+          ></device-details-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="6">
+          <device-graph-card
+            device-messages.bind="deviceMessages"
+            device.bind="device"
+          ></device-graph-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row>
+        <tn-grid-item grid-size="12">
+          <tag-entity-map-card
+            clicked-location-callback.call="addLocationTag(location)"
+            tag-entity.bind="device"
+          ></tag-entity-map-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

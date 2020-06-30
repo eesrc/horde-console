@@ -1,0 +1,31 @@
+<template>
+  <tn-input
+    floating-label
+    label="Event name"
+    help-text="The event name of your IFTTT Maker Event"
+    name="iftt-event-name"
+    value.bind="output.config.eventName"
+  ></tn-input>
+  <tn-checkbox
+    name="as-is-payload"
+    checked.bind="output.config.asIsPayload"
+    label="Decode base64 payload"
+  ></tn-checkbox>
+  <tn-input
+    floating-label
+    label="Service API Key"
+    help-text="Your IFTTT API key"
+    name="ifttt-api-key"
+    value.bind="output.config.key"
+  ></tn-input>
+  <tn-p>
+    Your API key can be found here
+    <a
+      class="link link--colored"
+      rel="noopener"
+      href="https://ifttt.com/services/maker_webhooks/settings"
+      target="_blank"
+      >IFTTT API key</a
+    >
+  </tn-p>
+</template>

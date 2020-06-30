@@ -1,0 +1,69 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <tn-expansion-panel data-cy="api-token">
+    <tn-expansion-panel-title
+      ><span title="${ token | tagName }">${ token | tagName }</span></tn-expansion-panel-title
+    >
+    <tn-expansion-panel-subtitle
+      ><span data-cy="api-token-subtitle">${ description }</span></tn-expansion-panel-subtitle
+    >
+    <tn-expansion-panel-body>
+      <h4 class="h4">Your API token</h4>
+      <tn-code-line icon="vpn_key" code.bind="token.token"></tn-code-line>
+      <tn-p
+        >This API token is used as your way of interacting directly with the API of Telenor
+        NB-IoT.</tn-p
+      >
+      <h4 class="h4">Examples</h4>
+      <section if.bind="hasFullAccessToAllResources">
+        <tn-p
+          >This token has full access to all resources. You can access resources in the API by using
+          the examples below.</tn-p
+        >
+        <tn-code-block
+          heading="Get the API root using API Token"
+          icon="code"
+          code.bind="curlGetRoot()"
+        ></tn-code-block>
+      </section>
+      <section if.bind="hasAccessAllCollections">
+        <tn-p
+          >This token allows access for all collections. You can access the collections in the API
+          by using the examples below
+        </tn-p>
+        <tn-code-block
+          heading="Fetch all collections by using your API token"
+          icon="code"
+          code.bind="curlGetCollections()"
+        ></tn-code-block>
+      </section>
+      <section if.bind="hasAccessToSpecificCollection">
+        <tn-p
+          >To interact with your collection you need to provide the id which can be found in the
+          examples below.
+        </tn-p>
+        <tn-code-block
+          heading="Fetch information about the collection by using your API token"
+          icon="code"
+          code.bind="curlGetCollectionInformation()"
+        ></tn-code-block>
+        <tn-code-block
+          heading="Fetch devices for collection by using your API token"
+          icon="code"
+          code.bind="curlGetCollectionDevices()"
+        ></tn-code-block>
+        <tn-code-block
+          heading="Set up websocket for collection by using your API token"
+          icon="code"
+          code.bind="curlGetCollectionWebsocket()"
+        ></tn-code-block>
+      </section>
+    </tn-expansion-panel-body>
+    <tn-expansion-panel-footer>
+      <tn-button data-cy="edit-api-token" flat click.delegate="editToken()">Edit token</tn-button>
+      <tn-button data-cy="delete-api-token" flat click.delegate="deleteToken()"
+        >Delete token</tn-button
+      >
+    </tn-expansion-panel-footer>
+  </tn-expansion-panel>
+</template>

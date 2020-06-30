@@ -1,0 +1,27 @@
+<template>
+  <require from="./tn-dropdown.scss"></require>
+  <div ref="dropdown" class="dropdown">
+    <button
+      type="button"
+      class="
+      dropdown__title
+      ${ disabled ? 'dropdown__title--disabled' : ''}
+    "
+      click.delegate="toggleDropdown()"
+    >
+      <slot name="dropdown-title">Fallback title</slot>
+    </button>
+    <div
+      ref="container"
+      class="
+      dropdown__container
+      dropdown__container--${ dropdownPosition }
+      ${ hasProp('transformTopRight') ? 'dropdown__container--transform-top-right' : '' }
+      ${active ? 'dropdown__container--visible' : ''}
+      ${ containerClasses }
+    "
+    >
+      <slot name="dropdown-container">Fallback items</slot>
+    </div>
+  </div>
+</template>

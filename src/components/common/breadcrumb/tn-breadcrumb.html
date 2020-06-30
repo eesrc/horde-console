@@ -1,0 +1,9 @@
+<template class="tn-breadcrumb">
+  <require from="./tn-breadcrumb.scss"></require>
+  <style>
+    .tn-breadcrumb__item::before {
+      content: "${separator}";
+    }
+  </style>
+  <slot></slot>
+</template>

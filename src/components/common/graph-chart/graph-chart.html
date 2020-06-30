@@ -1,0 +1,10 @@
+<template>
+  <require from="./graph-chart.scss"></require>
+  <canvas
+    class="
+    ${ hasProp('minHeight') ? 'graph-chart--min-height': ''}
+    ${ hasProp('fixedHeight') ? 'graph-chart--fixed-height': ''}
+  "
+    ref="canvas"
+  ></canvas>
+</template>

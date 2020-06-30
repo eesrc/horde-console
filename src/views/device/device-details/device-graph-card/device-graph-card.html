@@ -1,0 +1,21 @@
+<template>
+  <require from="components/common/graph-chart/graph-chart"></require>
+  <require from="components/common/graph-chart/no-graph-available.html"></require>
+  <require from="./device-graph-card.scss"></require>
+  <tn-card>
+    <tn-card-header>
+      <tn-card-title>Packages received</tn-card-title>
+    </tn-card-header>
+    <tn-card-body>
+      <graph-chart
+        min-height
+        chart-data.bind="chartData"
+        chart-options.bind="chartOptions"
+        chart-type.bind="chartType"
+      ></graph-chart>
+      <no-graph-available
+        if.bind="!chartData || chartData.datasets.length === 0"
+      ></no-graph-available>
+    </tn-card-body>
+  </tn-card>
+</template>

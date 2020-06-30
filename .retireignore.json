@@ -1,0 +1,46 @@
+[
+  {
+    "component": "jquery",
+    "justification": "jQuery is only used in test"
+  },
+  {
+    "component": "jquery-ui-dialog",
+    "justification": "Only used in selenium test-drives"
+  },
+  {
+    "component": "brace-expansion",
+    "justification": "only used in fsevents and used in dev-dependencies"
+  },
+  {
+    "component": "hoek",
+    "justification": "only used in test and build tools"
+  },
+  {
+    "component": "mixin-deep",
+    "justification": "only used in webpack loader"
+  },
+  {
+    "component": "sshpk",
+    "justification": "only used in jest and testing libs"
+  },
+  {
+    "component": "https-proxy-agent",
+    "justification": "only used in e2e testing"
+  },
+  {
+    "component": "utile",
+    "justification": "only used in init of conventions"
+  },
+  {
+    "component": "extend",
+    "justification": "only used in build tools"
+  },
+  {
+    "component": "merge",
+    "justification": "only used in test-libraries and tooling"
+  },
+  {
+    "component": "lodash",
+    "justification": "only used in test-libs"
+  }
+]

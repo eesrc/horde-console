@@ -1,0 +1,65 @@
+<template>
+  <tn-dialog>
+    <tn-dialog-sidebar>
+      <h2 class="h2">${ headerText }</h2>
+      <tn-dialog-sidebar-text>
+        <p>
+          The firmware needs to be a <em>binary</em> file which the device is able to install. You
+          can optionally add a name and version tag which can help you keep track of which firmware
+          is which.
+        </p>
+        <p>The <em>version</em> needs to be unique within the collection.</p>
+      </tn-dialog-sidebar-text>
+    </tn-dialog-sidebar>
+    <tn-dialog-body>
+      <form class="form" submit.delegate="submitFirmware()">
+        <tn-input
+          data-cy="firmware-name"
+          focus-element
+          floating-label
+          help-text="The name can be changed at any time."
+          label="Firmware name (optional)"
+          name="firmware-name"
+          value.bind="firmwareImage.tags.name"
+        ></tn-input>
+        <tn-input
+          data-cy="firmware-version"
+          floating-label
+          help-text="If no version provided a hash will be provided."
+          label="Version of the image (optional)"
+          name="firmware-version"
+          value.bind="firmwareImage.version"
+        ></tn-input>
+      </form>
+      <form class="form" ref="firmwareUploadForm">
+        <input
+          type="file"
+          accept=".bin,.elf"
+          ref="firmwareUploadFileElement"
+          value.bind="firmwareUploadFileName"
+          name="image"
+        />
+        <span if.bind="firmwareSize">
+          ${firmwareSize} bytes
+        </span>
+      </form>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button
+        data-cy="create-firmware-dialog-cancel"
+        flat
+        click.delegate="dialogController.cancel()"
+        >Cancel</tn-button
+      >
+      <tn-button
+        data-cy="create-firmware-dialog-confirm"
+        primary
+        raised
+        loading.bind="isLoading"
+        type="submit"
+        click.delegate="submitFirmware()"
+        >${ confirmButtonText }</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

@@ -1,0 +1,23 @@
+@import "variables/grid";
+
+.device-data-card {
+  &__container {
+    height: 100%;
+    max-height: 600px;
+    overflow: auto;
+  }
+
+  &__date-column {
+    width: 120px;
+  }
+
+  &__message-payload {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__decoding-description {
+    margin-right: $grid-size;
+  }
+}

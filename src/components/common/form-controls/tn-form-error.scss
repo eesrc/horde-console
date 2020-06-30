@@ -1,0 +1,15 @@
+@import "variables/colors";
+@import "variables/grid";
+@import "setup/typography";
+@import "mixins/typography";
+
+.tn-form-errors {
+  @include roboto;
+
+  &__error {
+    display: block;
+    margin-top: $grid-size;
+    color: $color--red;
+    font-weight: $font-weight--regular;
+  }
+}

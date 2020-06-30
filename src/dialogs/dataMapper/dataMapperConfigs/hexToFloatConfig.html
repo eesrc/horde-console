@@ -1,0 +1,13 @@
+<template>
+  <div class="form-group">
+    <select
+      id="hextofloat-endian"
+      class="form-group__input ${mapper.endianness ? 'form-group__input--has-data' : ''}"
+      value.bind="mapper.endianness"
+    >
+      <option value="be">Big endian</option>
+      <option value="le">Little endian</option>
+    </select>
+    <label for="hextofloat-endian" class="form-group__select-label">Endianness</label>
+  </div>
+</template>

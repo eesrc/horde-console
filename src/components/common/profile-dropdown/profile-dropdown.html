@@ -1,0 +1,53 @@
+<template class="profile-dropdown">
+  <require from="components/common/svg/propeller.html"></require>
+  <tn-dropdown
+    if.bind="userInformation.userProfile"
+    dropdown-position="below"
+    container-classes="profile-dropdown__container dropdown__container--transform-top-right"
+  >
+    <tn-dropdown-title>
+      <div class="avatar-container">
+        <img
+          class="avatar-container__avatar"
+          if.bind="userInformation.userProfile.avatarUrl"
+          src.bind="userInformation.userProfile.avatarUrl"
+          alt="avatar"
+        />
+        <img
+          else
+          class="avatar-container__avatar"
+          src.bind="userInformation.gravatarSrc"
+          alt="avatar"
+        />
+      </div>
+    </tn-dropdown-title>
+    <tn-dropdown-container>
+      <div class="profile-username">
+        <span class="profile-username__name-label">Signed in as</span>
+        <span
+          if.bind="userInformation.userProfile.provider === 'connect'"
+          class="profile-username__name"
+          title="${ userInformation.userProfile.email }"
+          >${userInformation.userProfile.email}</span
+        >
+        <span
+          if.bind="userInformation.userProfile.provider === 'github'"
+          class="profile-username__name"
+          title="${ userInformation.userProfile.githubLogin }"
+          >${userInformation.userProfile.githubLogin}</span
+        >
+      </div>
+      <a
+        class="profile-dropdown__menu-item"
+        target="_blank"
+        rel="noopener noreferrer"
+        href.bind="userInformation.userProfile.profileUrl"
+        >${ userInformation.userProfile.provider === 'github' ? 'GitHub' : 'CONNECT' } Account</a
+      >
+      <button class="profile-dropdown__menu-item" click.delegate="downloadAllData()">
+        Export all data
+      </button>
+      <a class="profile-dropdown__menu-item" href.bind="logOutHref()">Logout</a>
+    </tn-dropdown-container>
+  </tn-dropdown>
+</template>

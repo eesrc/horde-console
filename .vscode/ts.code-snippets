@@ -1,0 +1,78 @@
+{
+  "Create a basic service": {
+    "scope": "typescript",
+    "prefix": "tn-service",
+    "body": [
+      "import { autoinject } from \"aurelia-framework\";",
+      "import { ApiClient } from \"Helpers/ApiClient\";",
+      "",
+      "@autoinject",
+      "export class $1Service {",
+      "\tconstructor(",
+      "\t\tprivate apiClient: ApiClient,",
+      "\t) { }",
+      "",
+      "\tfetchAll$1s(): Promise<$1[]> {",
+      "\t\treturn this.apiClient.http.get(\"/$2\");",
+      "\t\t$0",
+      "\t}",
+      "}",
+      ""
+    ],
+    "description": "Create a starter service"
+  },
+  "Create log instance": {
+    "scope": "typescript",
+    "prefix": "tn-log",
+    "body": [
+      "import { LogBuilder } from \"Helpers/LogBuilder\";",
+      "const Log = LogBuilder.create(\"$1\");"
+    ],
+    "description": "Create a Log variable in a TypeScript file"
+  },
+  "Create component spec": {
+    "scope": "typescript",
+    "prefix": "tn-component-spec",
+    "body": [
+      "import { ComponentTester } from \"aurelia-testing\";",
+      "import { ComponentCreator } from \"Test/util\";",
+      "",
+      "/* Initiate the component creator with path to needed resources */",
+      "const creator = new ComponentCreator([\"components/$2\"]);",
+      "",
+      "describe(\"$1 component\", () => {",
+      "\tlet component: ComponentTester;",
+      "",
+      "\tit(\"should be able to render by default\", async () => {",
+      "\t\tcomponent = await creator.createComponent(",
+      "\t\t\t\"<$1></$1>\",",
+      "\t\t);",
+      "",
+      "\t\tconst element = document.querySelector(\"$1\");",
+      "\t\texpect(element.innerHTML).not.toBe(\"\");",
+      "\t});",
+      "",
+      "\tafterEach(() => {",
+      "\t\tcomponent.dispose();",
+      "\t});",
+      "});",
+      ""
+    ],
+    "description": "Creates a starter component spec"
+  },
+  "Create component prop test": {
+    "scope": "typescript",
+    "prefix": "tn-prop-test",
+    "body": [
+      "it(\"should $1 after adding prop '$2'\", async () => {",
+      "\tcomponent = await creator.createComponent(",
+      "\t\t\"<$3 $2></$3>\",",
+      "\t);",
+      "",
+      "\tconst inputElement = document.querySelector(\"$3\");",
+      "",
+      "\texpect(inputElement.className).toContain(\"something\");",
+      "});"
+    ]
+  }
+}

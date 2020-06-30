@@ -1,0 +1,17 @@
+@import "variables/grid";
+
+.tn-nav {
+  display: inline-flex;
+
+  &__item {
+    margin-right: 16px;
+    padding: $grid-size * 2 0;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 16px;
+    font-weight: 500;
+
+    &--active {
+      color: #007ace;
+    }
+  }
+}

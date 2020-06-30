@@ -1,0 +1,47 @@
+<template>
+  <tn-dialog>
+    <tn-dialog-sidebar>
+      <h2 class="h2">${ headerText }</h2>
+      <tn-dialog-sidebar-text>
+        A collection holds a group of devices and acts as a top level component for your devices. It
+        is always connected to a team.
+      </tn-dialog-sidebar-text>
+    </tn-dialog-sidebar>
+    <tn-dialog-body>
+      <form class="form" submit.delegate="submitCollection()">
+        <tn-input
+          data-cy="collection-name"
+          focus-element
+          floating-label
+          help-text="The name can be changed at any time."
+          label="Collection name (optional)"
+          name="collection-name"
+          value.bind="collection.tags.name"
+        ></tn-input>
+        <tn-select
+          help-text="The team which you want the collection to reside."
+          label="Team"
+          name="team-id"
+          value.bind="collection.teamId"
+          values.bind="availableTeams"
+        ></tn-select>
+      </form>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button
+        data-cy="create-collection-dialog-cancel"
+        flat
+        click.delegate="dialogController.cancel()"
+        >Cancel</tn-button
+      >
+      <tn-button
+        data-cy="create-collection-dialog-confirm"
+        primary
+        raised
+        type="submit"
+        click.delegate="submitCollection()"
+        >${ confirmButtonText }</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

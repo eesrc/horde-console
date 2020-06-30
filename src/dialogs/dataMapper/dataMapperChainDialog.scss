@@ -1,0 +1,108 @@
+@import "variables/colors";
+@import "variables/grid";
+@import "setup/typography";
+@import "mixins/responsive";
+
+.mapper-chain {
+  &__form {
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  @include screen-min($tablet-break-max) {
+    &__intro-field {
+      border-right: solid 1px $font-color-dividers;
+    }
+  }
+
+  &__data-mapper-help-text {
+    margin: $grid-size * 2 0 $grid-size * 4 0;
+    color: $font-color-secondary;
+    font-size: $font-size--20;
+    font-weight: $font-weight--light;
+  }
+
+  &__step {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    min-height: 100px;
+    margin-bottom: $grid-size * 4;
+
+    &--with-config {
+      margin-top: $grid-size * 4;
+      padding: 0;
+    }
+  }
+
+  &__step-heading {
+    display: flex;
+    position: absolute;
+    top: 12px;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-left: -70px;
+    border: solid 1px $color-grey-theme--darkest;
+    border-radius: 100%;
+    background-color: $color--google-grey-200;
+
+    @include screen-min($tablet-break-min) {
+      margin-left: -96px;
+    }
+
+    &--colored {
+      border: 0;
+      background-color: $color--telenor-blue;
+      color: $color--white;
+    }
+  }
+
+  &__add-step {
+    display: flex;
+    position: absolute;
+    top: 94px;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: -54px;
+    border: solid 1px $color-grey-theme--darkest;
+    border-radius: 100%;
+    background-color: $color--google-grey-200;
+    z-index: 1;
+
+    @include screen-min($tablet-break-min) {
+      margin-left: -80px;
+    }
+  }
+
+  &__delete-step {
+    position: absolute;
+    top: -$grid-size * 2;
+    right: -$grid-size * 2;
+  }
+
+  &__background-line {
+    position: absolute;
+    top: 12px;
+    bottom: 24px;
+    left: -38px;
+    width: 1px;
+    background-color: $color--google-grey-200;
+    z-index: 0;
+
+    @include screen-min($tablet-break-min) {
+      left: -64px;
+    }
+  }
+
+  &__result {
+    display: flex;
+    align-items: center;
+    height: $grid-size * 8;
+    overflow-x: scroll;
+  }
+}

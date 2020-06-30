@@ -1,0 +1,5 @@
+<template class="map-visualization ${ hasProp('bleed') ? 'map-visualization--bleed' : '' }">
+  <require from="components/common/graph-chart/no-graph-available.html"></require>
+  <no-graph-available if.bind="mapMarkers.length === 0"></no-graph-available>
+  <google-map auto-update-bounds="true" markers.bind="mapMarkers"></google-map>
+</template>

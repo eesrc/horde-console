@@ -1,0 +1,10 @@
+<template>
+  <h3 class="h3 collection-output__heading">IFTTT Configuration</h3>
+  <div class="collection-output__config-value">Event name: ${output.config.eventName}</div>
+  <div class="collection-output__config-value">
+    Base 64 decode message: ${output.config.asIsPayload ? "Enabled" : "Disabled" }
+  </div>
+  <div class="collection-output__config-value">
+    API Key: <tn-secret-text secret-text.bind="output.config.key"></tn-secret-text>
+  </div>
+</template>

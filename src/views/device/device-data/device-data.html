@@ -1,0 +1,45 @@
+<template>
+  <require from="./device-data-card/device-data-card"></require>
+  <require from="../device-heading.html"></require>
+  <require from="components/tag/tag-entity-map-card/tag-entity-map-card"></require>
+  <main-container>
+    <device-heading
+      router.bind="router"
+      device.bind="device"
+      collection.bind="collection"
+    ></device-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="3">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Data search</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-p>
+                Use the following parameters to configure listing of data.
+              </tn-p>
+              <tn-select label="Time frame" value.bind="selectedRange">
+                <option value="1h">Last hour</option>
+                <option value="6h">Last six hours</option>
+                <option value="24h">Last 24 hours</option>
+                <option value="all">Show all</option>
+              </tn-select>
+              <tn-select label="Data limit" value.bind="selectedNumberOfMessages">
+                <option value="10">10 last data points</option>
+                <option value="100">100 last data points</option>
+                <option value="1000">1000 last data points</option>
+              </tn-select>
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="9">
+          <device-data-card
+            device.bind="device"
+            device-messages.bind="deviceMessages"
+          ></device-data-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

@@ -1,0 +1,44 @@
+<template>
+  <require from="./token-expansion-panel/token-expansion-panel"></require>
+  <main-container>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="4" no-stretch>
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Your API tokens</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-p>
+                An API token will give you access directly to our NB-IoT API which gives you the
+                power to fetch and create resources according to your need programatically. This is
+                especially practical when working on a larger scale or you want to integrate
+                directly towards our backend.
+              </tn-p>
+              <tn-p if.bind="tokens.length > 0">
+                On the right you will find your existing tokens and you can create new ones by
+                clicking the "New API token" button.
+              </tn-p>
+              <tn-p if.bind="tokens.length === 0">
+                You have no API tokens yet. Why not create one? You can create new ones by clicking
+                the "New API token" button.
+              </tn-p>
+            </tn-card-body>
+            <tn-card-actions align-right>
+              <tn-button data-cy="create-new-token" flat click.trigger="createNewToken()"
+                >New API token</tn-button
+              >
+            </tn-card-actions>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="8" no-flex>
+          <token-expansion-panel
+            repeat.for="token of tokens"
+            collections.bind="collections"
+            token.bind="token"
+          ></token-expansion-panel>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

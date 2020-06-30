@@ -1,0 +1,89 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/timeAgo"></require>
+  <require from="./team-expansion-panel.scss"></require>
+  <require from="./team-expansion-panel-member-row"></require>
+  <tn-expansion-panel data-cy="team" open.bind="open">
+    <tn-expansion-panel-title>${ team | tagName }</tn-expansion-panel-title>
+    <tn-expansion-panel-subtitle>${ team.id }</tn-expansion-panel-subtitle>
+    <tn-expansion-panel-body>
+      <h3 class="h3 team-sub-heading">Users</h3>
+      <div class="table-overflow">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="table__head-data">Name</th>
+              <th class="table__head-data">Email</th>
+              <th class="table__head-data">User role</th>
+              <th class="table__head-data"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              as-element="team-expansion-panel-member-row"
+              repeat.for="member of teamDetails.members"
+              member.bind="member"
+              is-admin.bind="isAdmin"
+              is-self.bind="isSelf(member)"
+              remove-member-callback.call="removeMember(member)"
+              update-member-callback.call="updateMember(member)"
+            ></tr>
+          </tbody>
+        </table>
+      </div>
+      <div if.bind="isAdmin && !team.isPrivate">
+        <h3 class="h3 team-sub-heading">Invites</h3>
+        <tn-p
+          >You have a total of ${teamInvites.length} pending invites.
+          <tn-button data-cy="create-team-invite" click.delegate="createNewInvite()" flat
+            >Create new invite</tn-button
+          >
+        </tn-p>
+        <div class="table-overflow">
+          <table if.bind="teamInvites.length !== 0" class="table">
+            <thead>
+              <tr>
+                <th class="table__head-data">Invite code</th>
+                <th class="table__head-data">Invite created</th>
+                <th class="table__head-data"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-cy="team-invite" repeat.for="invite of teamInvites">
+                <td class="table__data">
+                  ${ invite.code }
+                  <tn-button data-cy="copy-team-invite" flat click.delegate="copyCode(invite)"
+                    >Copy</tn-button
+                  >
+                </td>
+                <td class="table__data">${ invite.createdAt | timeAgo }</td>
+                <td class="table__data table__data--action-column">
+                  <tn-dropdown transform-top-right>
+                    <tn-dropdown-title>
+                      <span data-cy="team-invite-dropdown" class="material-icons dropdown__icon"
+                        >more_vert</span
+                      >
+                    </tn-dropdown-title>
+                    <tn-dropdown-container>
+                      <tn-dropdown-item
+                        data-cy="delete-team-invite"
+                        click.delegate="deleteInvite(invite)"
+                        >Delete</tn-dropdown-item
+                      >
+                    </tn-dropdown-container>
+                  </tn-dropdown>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </tn-expansion-panel-body>
+    <tn-expansion-panel-footer>
+      <div if.bind="isAdmin && !team.isPrivate">
+        <tn-button data-cy="edit-team" flat click.delegate="editTeam()">Edit</tn-button>
+        <tn-button data-cy="delete-team" flat click.delegate="deleteTeam()">Delete</tn-button>
+      </div>
+    </tn-expansion-panel-footer>
+  </tn-expansion-panel>
+</template>

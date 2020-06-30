@@ -1,0 +1,10 @@
+.graph-chart {
+  &--min-height {
+    min-height: 280px;
+  }
+
+  &--fixed-height {
+    min-height: 280px;
+    max-height: 280px;
+  }
+}

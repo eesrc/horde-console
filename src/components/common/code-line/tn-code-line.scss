@@ -1,0 +1,46 @@
+@import "variables/colors";
+@import "variables/grid";
+@import "setup/typography";
+
+.code-line {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  margin-top: $grid-size * 2;
+  background-color: $color--google-grey-200;
+
+  &__content {
+    flex-grow: 1;
+    padding: 0 $grid-size * 2;
+    line-height: $grid-size * 5;
+    white-space: nowrap;
+    overflow: auto;
+  }
+
+  &__icon {
+    padding-right: $grid-size * 1.5;
+    padding-left: $grid-size * 1.5;
+    color: $font-color-secondary;
+    font-size: $grid-size * 4.5;
+    text-align: center;
+    user-select: none;
+
+    &--clickable {
+      cursor: pointer;
+    }
+
+    &--colored {
+      background-color: $color--telenor-blue;
+      color: $font-color-secondary--colored;
+
+      &:hover {
+        background-color: $color--telenor-blue-dark;
+        color: $font-color-primary--colored;
+      }
+
+      &:active {
+        background-color: $color--telenor-blue-darker;
+      }
+    }
+  }
+}

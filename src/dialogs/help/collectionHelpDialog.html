@@ -1,0 +1,36 @@
+<template>
+  <tn-dialog data-cy="collection-help-dialog">
+    <tn-dialog-header>
+      <h2 class="h2" title="Welcome to your collections">Welcome to your collections</h2>
+    </tn-dialog-header>
+    <tn-dialog-body>
+      <div class="help-dialog__content">
+        <figure>
+          <img
+            class="help-dialog__illustration"
+            alt="Figure representing collections"
+            src="/images/undraw_collection.svg"
+          />
+        </figure>
+        <tn-p>
+          Collections are the top level which will hold a collection of devices and are part of a
+          team of your choosing. The collections hold functionality such as having outputs for data
+          from the devices. You can add as many collections as you want.
+        </tn-p>
+      </div>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button data-cy="collection-help-dialog-cancel" flat click.delegate="cancel()"
+        >${cancelButtonText}</tn-button
+      >
+      <tn-button
+        data-cy="collection-help-dialog-confirm"
+        focus-element
+        primary
+        raised
+        click.delegate="accept()"
+        >${acceptButtonText}</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

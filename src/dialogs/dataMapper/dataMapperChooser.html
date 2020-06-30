@@ -1,0 +1,47 @@
+<template>
+  <require from="./dataMapperChooser.scss"></require>
+  <tn-dialog>
+    <tn-dialog-header>
+      <h2 class="h2">Select the mapper type</h2>
+    </tn-dialog-header>
+    <tn-dialog-body>
+      <div class="data-mapper-chooser">
+        <button
+          class="data-mapper-chooser__mapper"
+          repeat.for="mapper of availableMappers"
+          click.delegate="selectMapperType(mapper.id)"
+        >
+          <h3 class="h3 data-mapper-chooser__mapper-header">${mapper.value}</h3>
+          <p class="data-mapper-chooser__mapper-description">
+            <span if.bind="mapper.id === 'CHUNK'">
+              The "Chunk"-mapper is used to take a chunk of a longer string to be further processed
+              in a another chain step. It takes a start index and a size of the chunk.
+            </span>
+            <span if.bind="mapper.id === 'HEXTOFLOAT'">
+              The "Hex to float"-mapper takes the input and transforms it from a hex value to an
+              float. You can provide information wheter the data is of a big endian or little
+              endian. It also supports signed values.
+            </span>
+            <span if.bind="mapper.id === 'HEXTOINT'">
+              The "Hex to int"-mapper takes the input and transforms it from a hex value to an
+              integer. You can provide information wheter the data is of a big endian or little
+              endian. It also supports signed values.
+            </span>
+            <span if.bind="mapper.id === 'OFFSET'">
+              The "Offset"-mapper offsets the given value with the configured value below. This
+              could be useful for adding a offset found from other sensors or simply normalize data.
+            </span>
+            <span if.bind="mapper.id ==='BASE64'">
+              The "Base64"-mapper decodes/encodes the payload to make data usable for the next steps
+              in the mapper chain.
+            </span>
+            <span if.bind="mapper.id ==='FROMJSON'">
+              The "JSON"-mapper lets you access attributes on a JSON payload. To dig down the object
+              use "." as a separator.
+            </span>
+          </p>
+        </button>
+      </div>
+    </tn-dialog-body>
+  </tn-dialog>
+</template>

@@ -1,0 +1,59 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/take"></require>
+  <require from="valueConverters/timeAgo"></require>
+  <require from="valueConverters/dateFormat"></require>
+  <div class="table-overflow">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table__head-data">Name</th>
+          <th class="table__head-data visible-desktop">Id</th>
+          <th class="table__head-data">Last allocated IP</th>
+          <th class="table__head-data">IMEI</th>
+          <th class="table__head-data">IMSI</th>
+          <th class="table__head-data">Firmware</th>
+          <th class="table__head-data"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="device of devices | take:10">
+          <td class="table__data">
+            <a
+              route-href="route: device-details; params.bind: { collectionId: device.collectionId, deviceId: device.id }"
+              >${device | tagName}</a
+            >
+          </td>
+          <td class="table__data visible-desktop">${device.id}</td>
+          <td class="table__data">
+            <span if.bind="device.tags['radius-allocated-at']"
+              >${ device.tags["radius-ip-address"] } -
+              <span title="${device.tags['radius-allocated-at'] | dateFormat}"
+                >${ device.tags["radius-allocated-at"] | timeAgo & signal:'updateTime' }</span
+              ></span
+            >
+            <span else>Never seen</span>
+          </td>
+          <td class="table__data">${ device.imei }</td>
+          <td class="table__data">${ device.imsi }</td>
+          <td class="table__data">${ device.firmware ? device.firmware.state : 'Unknown' }</td>
+          <td class="table__data table__data--action-column">
+            <tn-dropdown transform-top-right>
+              <tn-dropdown-title>
+                <span class="material-icons dropdown__icon">more_vert</span>
+              </tn-dropdown-title>
+              <tn-dropdown-container>
+                <a
+                  class="dropdown__menu-item"
+                  route-href="route: device-details; params.bind: { collectionId: device.collectionId, deviceId: device.id }"
+                  >Settings</a
+                >
+                <tn-dropdown-item click.delegate="deleteDevice(device)">Delete</tn-dropdown-item>
+              </tn-dropdown-container>
+            </tn-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

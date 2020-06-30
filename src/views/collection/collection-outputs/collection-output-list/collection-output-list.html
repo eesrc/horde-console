@@ -1,0 +1,63 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/stringify"></require>
+  <require from="./outputConfigs/webhookConfig"></require>
+  <require from="./outputConfigs/mqttConfig"></require>
+  <require from="./outputConfigs/iftttConfig"></require>
+  <require from="./outputConfigs/udpConfig"></require>
+  <require from="./output-log/output-log"></require>
+  <require from="./collection-output-list.scss"></require>
+  <tn-expansion-panel class="collection-output" repeat.for="output of outputs">
+    <tn-expansion-panel-title>${ output | tagName }</tn-expansion-panel-title>
+    <tn-expansion-panel-subtitle
+      ><span
+        class="collection-output__status collection-output__status--${ output.enabled ? 'enabled' : 'disabled' }"
+      >
+        <tn-icon small center>lens</tn-icon>
+      </span>
+      ${ getOutputPrettyName(output.type) } - ${ !output.enabled ? "Disabled" : "Enabled" }
+    </tn-expansion-panel-subtitle>
+    <tn-expansion-panel-body>
+      <tn-grid>
+        <tn-grid-row>
+          <tn-grid-item grid-size="6">
+            <webhook-config
+              class="collection-output__config"
+              if.bind="output.type === 'webhook'"
+              output.bind="output"
+            ></webhook-config>
+            <ifttt-config
+              class="collection-output__config"
+              if.bind="output.type === 'ifttt'"
+              output.bind="output"
+            ></ifttt-config>
+            <mqtt-config
+              class="collection-output__config"
+              if.bind="output.type === 'mqtt'"
+              output.bind="output"
+            ></mqtt-config>
+            <udp-config
+              class="collection-output__config"
+              if.bind="output.type === 'udp'"
+              output.bind="output"
+            ></udp-config>
+          </tn-grid-item>
+          <tn-grid-item grid-size="6">
+            <output-log output.bind="output"></output-log>
+          </tn-grid-item>
+        </tn-grid-row>
+      </tn-grid>
+    </tn-expansion-panel-body>
+    <tn-expansion-panel-footer>
+      <tn-button
+        loading.bind="loadingToggle"
+        flat
+        class="collection-output__toggle-button"
+        click.delegate="toggleOutputEnabled(output)"
+        >${ output.enabled ? "Disable" : "Enable" }</tn-button
+      >
+      <tn-button flat click.delegate="editOutput(output)">Edit</tn-button>
+      <tn-button flat click.delegate="deleteOutput(output)">Delete</tn-button>
+    </tn-expansion-panel-footer>
+  </tn-expansion-panel>
+</template>

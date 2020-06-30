@@ -1,0 +1,106 @@
+{
+  "Add a dialog component": {
+    "scope": "html",
+    "prefix": "tn-dialog",
+    "body": [
+      "<tn-dialog>",
+      "\t<tn-dialog-header></tn-dialog-header>",
+      "\t<tn-dialog-body></tn-dialog-body>",
+      "\t<tn-dialog-footer></tn-dialog-footer>",
+      "</tn-dialog>",
+      ""
+    ],
+    "description": "Create a full tn-dialog component"
+  },
+  "Add a card component": {
+    "scope": "html",
+    "prefix": "tn-card",
+    "body": [
+      "<tn-card>",
+      "\t<tn-card-header>",
+      "\t\t<tn-card-title></tn-card-title>",
+      "\t\t<tn-card-header-actions></tn-card-header-actions>",
+      "\t</tn-card-header>",
+      "\t<tn-card-body>",
+      "\t</tn-card-body>",
+      "\t<tn-card-actions>",
+      "\t</tn-card-actions>",
+      "</tn-card>"
+    ],
+    "description": "Create a full tn-card component"
+  },
+  "Add a dropdown component": {
+    "scope": "html",
+    "prefix": "tn-dropdown",
+    "body": [
+      "<tn-dropdown>",
+      "\t<tn-dropdown-title>",
+      "\t</tn-dropdown-title>",
+      "\t<tn-dropdown-container>",
+      "\t\t<tn-dropdown-item></tn-dropdown-item>",
+      "\t\t<tn-dropdown-item></tn-dropdown-item>",
+      "\t\t<tn-dropdown-item></tn-dropdown-item>",
+      "\t</tn-dropdown-container>",
+      "</tn-dropdown>"
+    ],
+    "description": "Create a full tn-dropdown component"
+  },
+  "Add an expansion panel": {
+    "scope": "html",
+    "prefix": "tn-expansion-panel",
+    "body": [
+      "<tn-expansion-panel open.bind=\"open\">",
+      "\t<tn-expansion-panel-title></tn-expansion-panel-title>",
+      "\t<tn-expansion-panel-subtitle></tn-expansion-panel-subtitle>",
+      "\t<tn-expansion-panel-body></tn-expansion-panel-body>",
+      "\t<tn-expansion-panel-footer></tn-expansion-panel-footer>",
+      "</tn-expansion-panel>"
+    ],
+    "description": "Create a tn-expansion-panel component"
+  },
+  "Add an grid": {
+    "scope": "html",
+    "prefix": "tn-grid",
+    "body": [
+      "<tn-grid>",
+      "\t<tn-grid-row>",
+      "\t\t<tn-grid-item grid-size=\"4\"></tn-grid-item>",
+      "\t\t<tn-grid-item grid-size=\"4\"></tn-grid-item>",
+      "\t\t<tn-grid-item grid-size=\"4\"></tn-grid-item>",
+      "\t</tn-grid-row>",
+      "</tn-grid>"
+    ],
+    "description": "Create a tn-grid component"
+  },
+  "Add a table component": {
+    "scope": "html",
+    "prefix": "tn-table",
+    "body": [
+      "<table class=\"table\">",
+      "\t<thead>",
+      "\t\t<tr>",
+      "\t\t\t<th class=\"table__head-data\"></th>",
+      "\t\t\t<th class=\"table__head-data\"></th>",
+      "\t\t\t<th class=\"table__head-data\"></th>",
+      "\t\t</tr>",
+      "\t</thead>",
+      "\t<tbody>",
+      "\t\t<tr>",
+      "\t\t\t<td class=\"table__data\"></td>",
+      "\t\t\t<td class=\"table__data\"></td>",
+      "\t\t\t<td class=\"table__data table__data--action-column\"></td>",
+      "\t\t</tr>",
+      "\t</tbody>",
+      "</table>"
+    ],
+    "description": "Create a full table component"
+  },
+  "Add a input component": {
+    "scope": "html",
+    "prefix": "tn-input",
+    "body": [
+      "<tn-input floating-label name=\"$1\" label=\"$2\" value.bind=\"$3\" type=\"$4\" error-text.bind=\"$5\" help-text=\"$6\"></tn-input>"
+    ],
+    "description": "Create a tn-input component"
+  }
+}

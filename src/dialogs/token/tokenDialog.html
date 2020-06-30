@@ -1,0 +1,96 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <tn-dialog>
+    <tn-dialog-sidebar>
+      <h2 class="h2">${dialogHeader}</h2>
+      <tn-dialog-sidebar-text>
+        An API token allows you to programmatically interact with the APIs of the IoT platform.
+      </tn-dialog-sidebar-text>
+      <tn-dialog-sidebar-text>
+        It needs to have both an <em>Access level</em> and wheter it is <em>Read only</em> or
+        <em>Read and write</em>.
+      </tn-dialog-sidebar-text>
+    </tn-dialog-sidebar>
+    <tn-dialog-body>
+      <form class="form" submit.delegate="submitToken()">
+        <tn-form-error form-error.bind="formError"></tn-form-error>
+        <tn-input
+          data-cy="token-name"
+          focus-element
+          help-text="The name can be changed at any time."
+          value.bind="token.tags.name"
+          name="token-name"
+          label="Name"
+          floating-label
+        ></tn-input>
+        <div class="form-group">
+          <tn-select
+            data-cy="token-access-level"
+            label="Access level"
+            name="token-access-level"
+            value.bind="selectedResourceAccess"
+            values.bind="accessValues"
+          >
+          </tn-select>
+          <tn-select
+            data-cy="token-specific-collection-select"
+            if.bind="selectedResourceAccess === 'specific_collection'"
+            label="Collection"
+            value.bind="selectedCollection"
+          >
+            <option repeat.for="collection of collections" value="${collection.id}"
+              >${collection | tagName:'id'}</option
+            >
+          </tn-select>
+        </div>
+        <label class="radio-group">
+          <div class="radio-group__input">
+            <input
+              data-cy="token-readonly-radio"
+              type="radio"
+              value="readonly"
+              checked.bind="selectedAccessLevel"
+              name="token-type"
+            />
+          </div>
+          <div class="radio-group__input-text">
+            <h4 class="h4">Read only</h4>
+            <span
+              >Allows for the API token to access all data, but NOT alter state or add data</span
+            >
+          </div>
+        </label>
+        <label class="radio-group">
+          <div class="radio-group__input">
+            <input
+              data-cy="token-fullaccess-radio"
+              type="radio"
+              value="fullaccess"
+              checked.bind="selectedAccessLevel"
+              name="token-type"
+            />
+          </div>
+          <div class="radio-group__input-text">
+            <h4 class="h4">Read and write</h4>
+            <span
+              >Allows for the token to access, alter state and add data on given access level</span
+            >
+          </div>
+        </label>
+      </form>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button data-cy="create-token-dialog-cancel" flat click.delegate="cancel()"
+        >Cancel</tn-button
+      >
+      <tn-button
+        data-cy="create-token-dialog-confirm"
+        primary
+        raised
+        type="submit"
+        click.delegate="submitToken()"
+        >${confirmButtonText}</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

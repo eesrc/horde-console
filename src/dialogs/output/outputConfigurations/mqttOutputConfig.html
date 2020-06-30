@@ -1,0 +1,45 @@
+<template>
+  <tn-input
+    floating-label
+    label="Endpoint"
+    help-text="Ex: ssl://secure-endpoint:8443 or tcp://not-secure:8888"
+    name="mqtt-endpoint"
+    value.bind="output.config.endpoint"
+  ></tn-input>
+  <tn-checkbox
+    name="mqtt-validate-cert"
+    checked.bind="output.config.disableCertCheck"
+    label="Cert check disabled"
+  ></tn-checkbox>
+  <h3 class="h3">MQTT configuration</h3>
+  <tn-input
+    floating-label
+    label="Client id"
+    help-text="MQTT client id"
+    name="mqtt-client-id"
+    value.bind="output.config.clientId"
+  ></tn-input>
+  <tn-input
+    floating-label
+    label="Topic name"
+    help-text="MQTT topic name"
+    name="mqtt-topic-name"
+    value.bind="output.config.topicName"
+  ></tn-input>
+  <h3 class="h3">Security configuration</h3>
+  <tn-input
+    floating-label
+    label="Username"
+    help-text="The username to use towards the MQTT endpoint"
+    name="mqtt-endpoint-username"
+    value.bind="output.config.username"
+  ></tn-input>
+  <tn-input
+    type="password"
+    floating-label
+    label="Password"
+    help-text="The password to use towards the MQTT endpoint"
+    name="mqtt-endpoint-password"
+    value.bind="output.config.password"
+  ></tn-input>
+</template>

@@ -1,0 +1,108 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/dateFormat"></require>
+  <require from="../../collection/collection-heading.html"></require>
+  <main-container>
+    <collection-heading router.bind="router" collection.bind="collection"></collection-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="4">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Details for ${ firmwareImage | tagName }</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-card-body-heading>Firmware id</tn-card-body-heading>
+              <tn-p>${firmwareImage.id}</tn-p>
+              <tn-card-body-heading>Version</tn-card-body-heading>
+              <tn-p>${firmwareImage.version}</tn-p>
+              <tn-card-body-heading>Created</tn-card-body-heading>
+              <tn-p>${firmwareImage.created | dateFormat}</tn-p>
+              <tn-card-body-heading>File</tn-card-body-heading>
+              <tn-p>${firmwareImage.fileName}, ${firmwareImage.size} bytes</tn-p>
+            </tn-card-body>
+            <tn-card-actions align-right>
+              <tn-button flat click.delegate="editFirmwareImage()">Edit</tn-button>
+              <tn-button flat click.delegate="deleteFirmwareImage()">Delete</tn-button>
+            </tn-card-actions>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="8">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Firmware image usage</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-card-body-heading>Current usage</tn-card-body-heading>
+              <tn-p
+                >${firmwareUsage.currentDevices} ${ firmwareUsage.currentDevices === 1 ? 'device' :
+                'devices' }</tn-p
+              >
+              <tn-card-body-heading>Targeted usage</tn-card-body-heading>
+              <tn-p
+                >${firmwareUsage.targetedDevices} ${ firmwareUsage.currentDevices === 1 ? 'device' :
+                'devices' }</tn-p
+              >
+              <tn-p
+                >Current usage is the number of devices who are successfully <em>running</em> the
+                firmware now. Targeted usage is the <em>planned</em> number of devices who's
+                supposed to be running the firmware. If there's a divergence in the numbers, it's
+                most likely that an update haven't been propagated yet or that a update has failed
+                on one of the targeted devices.</tn-p
+              >
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row if.bind="firmwareUsage.deviceList.length > 0">
+        <tn-grid-item grid-size="12"
+          ><tn-card>
+            <tn-card-header>
+              <tn-card-title>Devices associated with firmware</tn-card-title>
+              <tn-card-header-actions></tn-card-header-actions>
+            </tn-card-header>
+            <tn-card-body no-padding>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="table__head-data">Device id</th>
+                    <th class="table__head-data">Currently running</th>
+                    <th class="table__head-data">Targeted</th>
+                    <th class="table__head-data"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr repeat.for="device of firmwareUsage.deviceList">
+                    <td class="table__data">
+                      <a
+                        route-href="route: device-details;params.bind: { collectionId: firmwareImage.collectionId, deviceId: device.id }"
+                      >
+                        ${device.id}
+                      </a>
+                    </td>
+                    <td class="table__data">${device.current ? 'Yes' : 'No'}</td>
+                    <td class="table__data">${device.targeted ? 'Yes' : 'No'}</td>
+                    <td class="table__data table__data--action-column">
+                      <tn-dropdown transform-top-right>
+                        <tn-dropdown-title>
+                          <tn-icon no-margin clickable>more_vert</tn-icon>
+                        </tn-dropdown-title>
+                        <tn-dropdown-container>
+                          <a
+                            class="dropdown__menu-item"
+                            route-href="route: device-details;params.bind: { collectionId: firmwareImage.collectionId, deviceId: device.id }"
+                            >Go to device</a
+                          >
+                        </tn-dropdown-container>
+                      </tn-dropdown>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </tn-card-body>
+            <tn-card-actions> </tn-card-actions> </tn-card
+        ></tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

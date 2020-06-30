@@ -1,0 +1,73 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/dateFormat"></require>
+  <require from="components/common/pagination/pagination"></require>
+  <require from="./collection-firmware-list-card.scss"></require>
+  <tn-card>
+    <tn-card-header table>
+      <tn-card-title>Firmware images</tn-card-title>
+    </tn-card-header>
+    <tn-card-body no-padding>
+      <div class="table-overflow">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="table__head-data">Name</th>
+              <th class="table__head-data visible-desktop">ID</th>
+              <th class="table__head-data">Version</th>
+              <th class="table__head-data">Size</th>
+              <th class="table__head-data">Created</th>
+              <th class="table__head-data"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr repeat.for="firmwareImage of filteredFirmwareImages">
+              <td class="table__data">
+                <a
+                  route-href="route: firmware-details;params.bind: { collectionId: firmwareImage.collectionId, firmwareImageId: firmwareImage.id }"
+                >
+                  ${firmwareImage | tagName}
+                </a>
+              </td>
+              <td class="table__data visible-desktop">${firmwareImage.id}</td>
+              <td class="table__data" title.bind="firmwareImage.version">
+                <span class="firmware-table__version">
+                  ${firmwareImage.version}
+                </span>
+              </td>
+              <td class="table__data">
+                ${firmwareImage.size} bytes
+              </td>
+              <td class="table__data">${ firmwareImage.created | dateFormat }</td>
+              <td class="table__data table__data--action-column">
+                <tn-dropdown transform-top-right>
+                  <tn-dropdown-title>
+                    <tn-icon no-margin clickable>more_vert</tn-icon>
+                  </tn-dropdown-title>
+                  <tn-dropdown-container>
+                    <a
+                      class="dropdown__menu-item"
+                      route-href="route: firmware-details;params.bind: { collectionId: firmwareImage.collectionId, firmwareImageId: firmwareImage.id }"
+                      >Settings</a
+                    >
+                    <tn-dropdown-item click.delegate="editFirmwareImage(firmwareImage)"
+                      >Edit</tn-dropdown-item
+                    >
+                    <tn-dropdown-item click.delegate="deleteFirmwareImage(firmwareImage)"
+                      >Delete</tn-dropdown-item
+                    >
+                  </tn-dropdown-container>
+                </tn-dropdown>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <pagination
+        rows-pr-page="10"
+        filter-callback.call="filteredFirmwareImagesCallback(filteredCollection)"
+        collection.bind="firmwareImages"
+      ></pagination>
+    </tn-card-body>
+  </tn-card>
+</template>

@@ -1,0 +1,24 @@
+<template>
+  <tn-dialog small>
+    <tn-dialog-header small>
+      <h2 class="h2">Data export</h2>
+    </tn-dialog-header>
+    <tn-dialog-body small>
+      <tn-p secondary>
+        This will export all available data from all your collections, devices, and teams.
+      </tn-p>
+      <tn-p secondary>
+        To initiate the export, click the "Initiate data export" button below
+      </tn-p>
+      <tn-p>
+        Note: This can be a lot of data.
+      </tn-p>
+    </tn-dialog-body>
+    <tn-dialog-footer small align-right>
+      <tn-button flat click.delegate="closeDialog()">Close</tn-button>
+      <tn-button primary raised click.delegate="initiateDataExport()"
+        >Initiate data export</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

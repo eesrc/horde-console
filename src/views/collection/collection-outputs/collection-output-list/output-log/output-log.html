@@ -1,0 +1,32 @@
+<template class="output-log">
+  <require from="./output-log.scss"></require>
+  <require from="valueConverters/timeAgo"></require>
+  <h3 class="h3 collection-output__heading">Output event log</h3>
+  <table if.bind="output.enabled" class="table">
+    <thead>
+      <tr>
+        <th class="table__head-data">Triggered</th>
+        <th class="table__head-data">Message</th>
+        <th class="table__head-data">Repeated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="outputLog of outputLogs">
+        <td class="table__data">${ outputLog.timestamp | timeAgo & signal:'updateTime' }</td>
+        <td class="table__data">${ outputLog.message }</td>
+        <td class="table__data">${ outputLog.repeated }</td>
+      </tr>
+    </tbody>
+  </table>
+  <tn-button
+    if.bind="output.enabled"
+    loading.bind="loading"
+    click.delegate="fetchOutputLogs()"
+    flat
+  >
+    Refresh logs <tn-icon right>refresh</tn-icon>
+  </tn-button>
+  <tn-p if.bind="!output.enabled">
+    Output not enabled. To see logs, please enable the output.
+  </tn-p>
+</template>

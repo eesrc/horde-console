@@ -1,0 +1,23 @@
+<template class="device-stream-card">
+  <require from="./device-message-entry"></require>
+  <require from="./device-stream-card.scss"></require>
+  <require from="components/common/pagination/pagination"></require>
+  <tn-card>
+    <tn-card-body>
+      <tn-card-title>Live stream for device</tn-card-title>
+      <div class="device-stream-card__message-table">
+        <device-message-entry
+          repeat.for="message of filteredWebsocketData"
+          device-message.bind="message"
+        ></device-message-entry>
+      </div>
+    </tn-card-body>
+    <tn-card-actions>
+      <pagination
+        rows-pr-page="5"
+        filter-callback.call="filteredWebsocketDataCallback(filteredCollection)"
+        collection.bind="websocketData"
+      ></pagination>
+    </tn-card-actions>
+  </tn-card>
+</template>

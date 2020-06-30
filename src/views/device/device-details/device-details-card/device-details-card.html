@@ -1,0 +1,35 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/timeAgo"></require>
+  <require from="valueConverters/dateFormat"></require>
+  <require from="components/common/range-chooser/range-chooser"></require>
+  <tn-card>
+    <tn-card-header>
+      <tn-card-title>Details</tn-card-title>
+    </tn-card-header>
+    <tn-card-body>
+      <tn-card-body-heading>Device id</tn-card-body-heading>
+      <tn-p>${ device.id }</tn-p>
+      <tn-card-body-heading>Collection id</tn-card-body-heading>
+      <tn-p>${ device.collectionId }</tn-p>
+      <tn-card-body-heading>IMEI</tn-card-body-heading>
+      <tn-p>${ device.imei }</tn-p>
+      <tn-card-body-heading>IMSI</tn-card-body-heading>
+      <tn-p>${ device.imsi }</tn-p>
+      <tn-card-body-heading>Last allocated IP</tn-card-body-heading>
+      <tn-p>
+        <span if.bind="device.tags['radius-allocated-at']"
+          >${ device.tags["radius-ip-address"] } -
+          <span title="${device.tags['radius-allocated-at'] | dateFormat}"
+            >${ device.tags["radius-allocated-at"] | timeAgo & signal:'updateTime' }</span
+          ></span
+        >
+        <span else>Never seen</span>
+      </tn-p>
+    </tn-card-body>
+    <tn-card-actions align-right>
+      <tn-button flat click.delegate="editDevice()">Edit</tn-button>
+      <tn-button flat click.delegate="deleteDevice()">Delete</tn-button>
+    </tn-card-actions>
+  </tn-card>
+</template>

@@ -1,0 +1,25 @@
+@import "variables/grid";
+@import "variables/colors";
+
+.tn-breadcrumb {
+  display: block;
+  margin-bottom: $grid-size;
+  color: rgba(0, 0, 0, 0.54);
+
+  &__item {
+    display: inline-block;
+
+    &::before {
+      margin-left: 4px;
+    }
+
+    &:first-of-type::before {
+      display: none;
+      content: "";
+    }
+  }
+
+  &__link {
+    border-bottom: dotted 1px;
+  }
+}

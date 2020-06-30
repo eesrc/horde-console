@@ -1,0 +1,52 @@
+<template class="device-message-entry">
+  <require from="./device-message-entry.scss"></require>
+  <require from="valueConverters/timeAgo"></require>
+  <require from="valueConverters/dateFormat"></require>
+  <require from="valueConverters/stringify"></require>
+  <div class="device-message-entry__header" click.delegate="toggle()">
+    <span class="device-message-entry__heading"
+      >${deviceMessage.transport.toUpperCase()}:
+      <span class="device-message-entry__heading--secondary">${getTransportMeta()}</span></span
+    >
+    <span
+      class="device-message-entry__heading-details"
+      title="${ deviceMessage.received | dateFormat }"
+      >${ deviceMessage.received | timeAgo & signal:'updateTime' }</span
+    >
+    <span class="device-message-entry__heading-more-code">{ ... }</span>
+    <span class="material-icons"
+      >${ toggled ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }</span
+    >
+    <span class="device-message-entry__heading-actions">
+      <tn-button flat click.delegate="copyAsJson($event)">Copy as JSON</tn-button>
+    </span>
+  </div>
+  <div
+    class="device-message-entry__data ${ toggled ? 'device-message-entry__data--expanded' : '' }"
+  >
+    <div class="device-message-entry__data-group">
+      <div class="device-message-entry__data-name">Payload</div>
+      <div class="device-message-entry__data-value" title="${ deviceMessage.payload }">
+        ${ deviceMessage.payload }
+      </div>
+    </div>
+    <div class="device-message-entry__data-group">
+      <div class="device-message-entry__data-name">Received</div>
+      <div class="device-message-entry__data-value">${ deviceMessage.received }</div>
+    </div>
+    <div class="device-message-entry__data-group">
+      <div class="device-message-entry__data-name">Direction</div>
+      <div class="device-message-entry__data-value">${ deviceMessage.direction }</div>
+    </div>
+    <div class="device-message-entry__data-group">
+      <div class="device-message-entry__data-name">Transport</div>
+      <div class="device-message-entry__data-value">${ deviceMessage.transport.toUpperCase() }</div>
+    </div>
+    <div class="device-message-entry__data-group">
+      <div class="device-message-entry__data-name">Device</div>
+      <div class="device-message-entry__data-value">
+        <pre class="tn-pre">${ deviceMessage.device | stringify }</pre>
+      </div>
+    </div>
+  </div>
+</template>

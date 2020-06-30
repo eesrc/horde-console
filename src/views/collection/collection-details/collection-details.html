@@ -1,0 +1,63 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/stringify"></require>
+  <require from="../collection-heading.html"></require>
+  <require from="./collection-device-list/collection-device-list"></require>
+  <require from="./collection-graph-card/collection-graph-card"></require>
+  <main-container>
+    <collection-heading router.bind="router" collection.bind="collection"></collection-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="4">
+          <tn-card data-cy="collection-details-card">
+            <tn-card-header>
+              <tn-card-title>Details</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-card-body-heading>Number of devices</tn-card-body-heading>
+              <tn-p>${devices.length}</tn-p>
+              <tn-card-body-heading>Collection id</tn-card-body-heading>
+              <tn-p>${collection.id}</tn-p>
+              <tn-card-body-heading>Team id</tn-card-body-heading>
+              <tn-p>${collection.teamId}</tn-p>
+            </tn-card-body>
+            <tn-card-actions align-right>
+              <tn-button flat click.delegate="editCollection()">Edit</tn-button>
+              <tn-button flat click.delegate="deleteCollection()">Delete</tn-button>
+            </tn-card-actions>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="8">
+          <collection-graph-card
+            message-data.bind="collectionDeviceMessages"
+            devices.bind="devices"
+            collection.bind="collection"
+          ></collection-graph-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row>
+        <tn-grid-item grid-size="12">
+          <tn-card data-cy="collection-last-devices-card">
+            <tn-card-header table>
+              <tn-card-title>Last 10 devices for ${ collection | tagName }</tn-card-title>
+              <tn-card-header-actions>
+                <tn-button flat click.delegate="createDevice()">Add new device</tn-button>
+              </tn-card-header-actions>
+            </tn-card-header>
+            <tn-card-body no-padding>
+              <collection-device-list
+                delete-callback.call="deleteDevice(device)"
+                devices.bind="devices"
+              ></collection-device-list>
+            </tn-card-body>
+            <tn-card-actions align-right>
+              <tn-button click.delegate="goToCollectionDevices()" flat>
+                <tn-icon left>arrow_forward</tn-icon>Go to devices for collection
+              </tn-button>
+            </tn-card-actions>
+          </tn-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

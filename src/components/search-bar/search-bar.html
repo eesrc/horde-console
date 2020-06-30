@@ -1,0 +1,72 @@
+<template class="tn-search-bar">
+  <require from="valueConverters/tagName"></require>
+  <label>
+    <tn-icon clickable center no-margin>search</tn-icon
+    ><input
+      class="
+      tn-search-bar__input-field
+      ${hasFocus || searchTerm ? 'tn-search-bar__input-field--focused' : ''}
+    "
+      focus.bind="hasFocus"
+      type="search"
+      placeholder="Search"
+      value.bind="searchTerm & debounce:500"
+    />
+  </label>
+  <div if.bind="searchTerm" class="tn-search-bar__search-result">
+    <h4 class="h4 tn-search-bar__search-result-sub-header">
+      <span if.bind="error"
+        >Something went wrong when trying to search. Please try again later.</span
+      >
+      <span if.bind="loading">Searching ...</span>
+      <span
+        if.bind="!loading && !error && collectionResults.length === 0 && teamResults.length === 0 && deviceResults.length === 0"
+        >No results. Not searching for devices unless you have selected a collection.</span
+      >
+    </h4>
+    <div class="tn-search-bar__search-result-group" if.bind="collectionResults.length !== 0">
+      <h4 class="h4 tn-search-bar__search-result-sub-header">
+        Collections found (${collectionResults.length})
+      </h4>
+      <div class="tn-search-bar__search-result-item" repeat.for="collection of collectionResults">
+        <a
+          class="link link--colored"
+          href="/collection-overview/${collection.id}"
+          click.delegate="clearSearch()"
+          >${collection | tagName}</a
+        >
+      </div>
+    </div>
+    <div class="tn-search-bar__search-result-group" if.bind="teamResults.length !== 0">
+      <h4 class="h4 tn-search-bar__search-result-sub-header">
+        Teams found (${teamResults.length})
+      </h4>
+      <div class="tn-search-bar__search-result-item" repeat.for="team of teamResults">
+        <a
+          class="link link--colored"
+          href="/team-overview?teamId=${team.id}"
+          click.delegate="clearSearch()"
+          >${team | tagName}</a
+        >
+      </div>
+    </div>
+    <div class="tn-search-bar__search-result-group" if.bind="deviceResults.length !== 0">
+      <h4 class="h4 tn-search-bar__search-result-sub-header">
+        Devices found in current collection (${deviceResults.length})
+      </h4>
+      <div class="tn-search-bar__search-result-item" repeat.for="device of deviceResults">
+        <a
+          class="link link--colored"
+          href="/collection-overview/${device.collectionId}/devices/${device.id}"
+          click.delegate="clearSearch()"
+          >${device | tagName}</a
+        >
+      </div>
+    </div>
+    <span class="tn-search-bar__clear-search">
+      <tn-button icon flat click.delegate="clearSearch()">
+        <tn-icon no-margin>clear</tn-icon>
+      </tn-button>
+    </span>
+  </div>
+</template>

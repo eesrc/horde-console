@@ -1,0 +1,50 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/stringify"></require>
+  <require from="./collection-graph-card/collection-graph-card"></require>
+  <require from="./data-mapper-visualization/data-mapper-visualization"></require>
+  <require from="../collection-heading.html"></require>
+  <main-container>
+    <collection-heading router.bind="router" collection.bind="collection"></collection-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="4">
+          <tn-card data-cy="collection-details-card">
+            <tn-card-header>
+              <tn-card-title>${ collection | tagName } visualizations</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-p
+                >To visualize your data we need to know what your data <em>is</em>. For that we've
+                created data-mappers which will allow you to set up a chain of transformations so
+                that we can pipe the data into different types of visualizations.</tn-p
+              >
+            </tn-card-body>
+            <tn-card-actions align-right>
+              <tn-button flat click.delegate="createNewDataMapper()">Add visualization</tn-button>
+            </tn-card-actions>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="8">
+          <collection-graph-card
+            message-data.bind="collectionDeviceMessages"
+            devices.bind="devices"
+            collection.bind="collection"
+          ></collection-graph-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row>
+        <tn-grid-item grid-size="6" repeat.for="dataMapperChain of dataMapperChains">
+          <data-mapper-visualization
+            message-data.bind="collectionDeviceMessages"
+            selected-range.bind="selectedRange"
+            edit-visualization-callback.call="editDataMapperChain(dataMapperChain)"
+            delete-visualization-callback.call="deleteDataMapperChain(dataMapperChain)"
+            devices.bind="devices"
+            data-mapper-chain.bind="dataMapperChain"
+          ></data-mapper-visualization>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

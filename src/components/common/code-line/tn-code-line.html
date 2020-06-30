@@ -1,0 +1,10 @@
+<template>
+  <require from="./tn-code-line.scss"></require>
+  <div class="code-line">
+    <div class="code-line__icon">
+      <i if.bind="icon" class="material-icons">${ icon }</i>
+    </div>
+    <code class="code-line__content">${ code }</code>
+    <tn-button flat click.delegate="copySource($event)">Copy</tn-button>
+  </div>
+</template>

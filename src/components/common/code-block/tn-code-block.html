@@ -1,0 +1,13 @@
+<template bindable="code, icon, heading">
+  <require from="./tn-code-block.scss"></require>
+  <div class="code-block">
+    <div class="code-block__header">
+      <div class="code-block__icon">
+        <i if.bind="icon" class="material-icons">${ icon }</i>
+      </div>
+      <h4 class="h4 code-block__heading">${heading}</h4>
+      <tn-button flat click.delegate="copySource($event)">Copy</tn-button>
+    </div>
+    <pre class="code-block__content">${ code }</pre>
+  </div>
+</template>

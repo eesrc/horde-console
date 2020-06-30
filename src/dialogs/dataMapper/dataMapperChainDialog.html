@@ -1,0 +1,96 @@
+<template>
+  <require from="valueConverters/stringify"></require>
+  <require from="valueConverters/toInt"></require>
+  <require from="./dataMapperChainDialog.scss"></require>
+  <require from="./dataMapper"></require>
+  <tn-dialog cover class="mapper-chain">
+    <tn-dialog-header>
+      <h2 class="h2">${ heading }</h2>
+    </tn-dialog-header>
+    <tn-dialog-body>
+      <tn-grid>
+        <tn-grid-row>
+          <tn-grid-item grid-size="4" class="mapper-chain__intro-field">
+            <form class="mapper-chain__form" submit.delegate="submitDataMapper()">
+              <tn-input
+                floating-label
+                focus-element
+                value.bind="dataMapperName"
+                name="data-mapper-name"
+                label="Mapper name"
+              ></tn-input>
+              <div class="mapper-chain__data-mapper-help-text">
+                The data mapper helps you make sense of your data and makes it easy to graph the
+                payload coming from your devices.
+              </div>
+            </form>
+          </tn-grid-item>
+          <tn-grid-item no-flex grid-size="8">
+            <form class="mapper-chain__form">
+              <div class="mapper-chain__background-line"></div>
+              <div class="mapper-chain__step">
+                <h3 class="mapper-chain__step-heading mapper-chain__step-heading--colored h3">
+                  IN
+                </h3>
+                <tn-input
+                  floating-label
+                  value.bind="testString"
+                  name="test-string"
+                  label="Test string"
+                ></tn-input>
+                <tn-button
+                  icon
+                  click.delegate="addNewMapper(0)"
+                  flat
+                  class="mapper-chain__add-step h3"
+                  >+</tn-button
+                >
+              </div>
+              <div
+                repeat.for="mapper of mappers"
+                class="mapper-chain__step mapper-chain__step--with-config"
+              >
+                <h3 class="mapper-chain__step-heading h3">OP</h3>
+                <data-mapper data-mapper.bind="mapper"></data-mapper>
+                <tn-button
+                  icon
+                  click.delegate="addNewMapper($index + 1)"
+                  flat
+                  class="mapper-chain__add-step mapper-chain__add-step--with-config h3"
+                  >+</tn-button
+                >
+                <tn-button
+                  icon
+                  click.delegate="removeDataMapper($index)"
+                  flat
+                  class="mapper-chain__delete-step"
+                >
+                  <tn-icon no-margin>cancel</tn-icon>
+                </tn-button>
+              </div>
+              <div class="mapper-chain__step mapper-chain__step">
+                <h3 class="mapper-chain__step-heading mapper-chain__step-heading--colored h3">
+                  OUT
+                </h3>
+                <pre class="mapper-chain__result tn-pre">${testResult}</pre>
+              </div>
+            </form>
+            <form class="mapper-chain__form">
+              <h3 class="h3">Visualization</h3>
+              <tn-select label="Visualize as" value.bind="visualizationType">
+                <option value="graph">Graph</option>
+                <option value="map">Map</option>
+              </tn-select>
+            </form>
+          </tn-grid-item>
+        </tn-grid-row>
+      </tn-grid>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button flat click.delegate="dialogController.cancel()">${ cancelButtonText }</tn-button>
+      <tn-button primary raised type="submit" click.delegate="submitDataMapper()"
+        >${ confirmButtonText }</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

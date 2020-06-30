@@ -1,0 +1,37 @@
+<template>
+  <tn-dialog>
+    <tn-dialog-sidebar>
+      <h2 class="h2">${ headerText }</h2>
+      <tn-dialog-sidebar-text>
+        A team consists of one or more members and by using a team, you can share collections
+        between users.
+      </tn-dialog-sidebar-text>
+    </tn-dialog-sidebar>
+    <tn-dialog-body>
+      <form class="form" submit.delegate="submitTeam()">
+        <tn-input
+          data-cy="team-name"
+          floating-label
+          focus-element
+          help-text="Can be changed at any time."
+          label="Team name"
+          name="team-name"
+          value.bind="team.tags.name"
+        ></tn-input>
+      </form>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button data-cy="create-team-dialog-cancel" flat click.delegate="dialogController.cancel()"
+        >Cancel</tn-button
+      >
+      <tn-button
+        data-cy="create-team-dialog-confirm"
+        primary
+        raised
+        type="submit"
+        click.delegate="submitTeam()"
+        >${ confirmButtonText }</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

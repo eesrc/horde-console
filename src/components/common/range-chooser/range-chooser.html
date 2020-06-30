@@ -1,0 +1,10 @@
+<template class="range-chooser">
+  <require from="./range-chooser.scss"></require>
+  <button
+    class="button button--flat range-chooser__option ${ range === selectedRange ? 'range-chooser__option--selected' : '' }"
+    repeat.for="range of availableRanges"
+    click.delegate="selectRange(range)"
+  >
+    ${ range.id }
+  </button>
+</template>

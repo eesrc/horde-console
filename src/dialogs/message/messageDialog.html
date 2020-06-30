@@ -1,0 +1,33 @@
+<template>
+  <require from="./messageDialog.scss"></require>
+  <tn-dialog small transparent class="message-dialog">
+    <tn-dialog-header small>
+      <h2 class="h2">${messageHeader}</h2>
+    </tn-dialog-header>
+    <tn-dialog-body small>
+      <div class="message-dialog__content">
+        ${message}
+      </div>
+    </tn-dialog-body>
+    <tn-dialog-footer small>
+      <tn-button
+        data-cy="message-dialog-cancel"
+        flat
+        show.bind="cancelButtonText"
+        focused
+        click.delegate="cancel()"
+        >${cancelButtonText}</tn-button
+      >
+      <tn-button
+        data-cy="message-dialog-confirm"
+        primary
+        raised
+        focused
+        show.bind="confirmButtonText"
+        type="submit"
+        click.delegate="ok()"
+        >${confirmButtonText}</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

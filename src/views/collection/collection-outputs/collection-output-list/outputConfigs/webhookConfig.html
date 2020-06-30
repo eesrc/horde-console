@@ -1,0 +1,17 @@
+<template>
+  <h3 class="h3 collection-output__heading">Configuration</h3>
+  <div class="collection-output__config-value">URL: ${output.config.url}</div>
+  <div if.bind="output.config.basicAuthPassword && output.config.basicAuthUser">
+    <h3 class="h3 collection-output__heading">Auth</h3>
+    <div class="collection-output__config-value">Username: ${output.config.basicAuthUser}</div>
+    <div class="collection-output__config-value">
+      Password: <tn-secret-text secret-text.bind="output.config.basicAuthPassword"></tn-secret-text>
+    </div>
+  </div>
+  <h3
+    if.bind="!output.config.basicAuthPassword || !output.config.basicAuthUser"
+    class="h3 collection-output__heading"
+  >
+    No auth configured
+  </h3>
+</template>

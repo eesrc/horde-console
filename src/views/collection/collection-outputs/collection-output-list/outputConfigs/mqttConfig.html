@@ -1,0 +1,15 @@
+<template>
+  <h3 class="h3 collection-output__heading">Configuration</h3>
+  <div class="collection-output__config-value">URL: ${output.config.endpoint}</div>
+  <div class="collection-output__config-value">
+    Disabled cert check: ${output.config.disableCertCheck ? "Yes" : "No" }
+  </div>
+  <h3 class="h3 collection-output__heading">Mqtt configuration</h3>
+  <div class="collection-output__config-value">Client id: ${output.config.clientId }</div>
+  <div class="collection-output__config-value">Topic name: ${output.config.topicName }</div>
+  <h3 class="h3 collection-output__heading">Auth</h3>
+  <div class="collection-output__config-value">Username: ${output.config.username}</div>
+  <div class="collection-output__config-value">
+    Password: <tn-secret-text secret-text.bind="output.config.password"></tn-secret-text>
+  </div>
+</template>

@@ -1,0 +1,40 @@
+<template>
+  <tn-input
+    floating-label
+    label="Endpoint"
+    help-text="The url of the webhook endpoint. Ex: https://example.com"
+    name="webhook-endpoint"
+    value.bind="output.config.url"
+  ></tn-input>
+  <h3 class="h3">Basic Auth (Optional)</h3>
+  <tn-input
+    floating-label
+    label="Username"
+    help-text="The username to use towards the webhook endpoint"
+    name="webhook-endpoint-username"
+    value.bind="output.config.basicAuthUser"
+  ></tn-input>
+  <tn-input
+    type="password"
+    floating-label
+    label="Password"
+    help-text="The password to use towards the webhook endpoint"
+    name="webhook-endpoint-password"
+    value.bind="output.config.basicAuthPassword"
+  ></tn-input>
+  <h3 class="h3">Custom header (Optional)</h3>
+  <tn-input
+    floating-label
+    label="Custom header name"
+    help-text="The name of the custom header"
+    name="custom-header-name"
+    value.bind="output.config.customHeaderName"
+  ></tn-input>
+  <tn-input
+    floating-label
+    label="Custom header value"
+    help-text="The value of the custom header"
+    name="custom-header-value"
+    value.bind="output.config.customHeaderValue"
+  ></tn-input>
+</template>

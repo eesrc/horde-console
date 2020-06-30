@@ -1,0 +1,15 @@
+<template>
+  <require from="valueConverters/toInt"></require>
+  <tn-input
+    type="number"
+    label="Chunk start index"
+    name="chunk-start"
+    value.bind="mapper.start | toInt"
+  ></tn-input>
+  <tn-input
+    type="number"
+    label="Chunk size"
+    name="chunk-size"
+    value.bind="mapper.size | toInt"
+  ></tn-input>
+</template>

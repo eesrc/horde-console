@@ -1,0 +1,32 @@
+<template>
+  <require from="./pagination.scss"></require>
+  <div class="pagination">
+    <div>
+      Rows per page:
+      <tn-dropdown dropdown-position="top" class="pagination__row-pr-page">
+        <tn-dropdown-title
+          >${ rowsPrPage }
+          <span class="material-icons pagination__dropdown-triangle">arrow_drop_down</span>
+        </tn-dropdown-title>
+        <tn-dropdown-container>
+          <button
+            repeat.for="rowsPrPageNumber of availableRowsPrPage"
+            class="dropdown__menu-item"
+            click.delegate="setRowsPrPage(rowsPrPageNumber)"
+          >
+            ${rowsPrPageNumber}
+          </button>
+        </tn-dropdown-container>
+      </tn-dropdown>
+    </div>
+    <div class="pagination__row-data">${ rowData }</div>
+    <div class="pagination__page-control ">
+      <tn-button icon click.delegate="decreasePageNumber()" flat no-margin>
+        <tn-icon>chevron_left</tn-icon>
+      </tn-button>
+      <tn-button icon click.delegate="increasePageNumber()" flat>
+        <tn-icon>chevron_right</tn-icon>
+      </tn-button>
+    </div>
+  </div>
+</template>

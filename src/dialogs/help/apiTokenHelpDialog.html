@@ -1,0 +1,36 @@
+<template>
+  <tn-dialog data-cy="api-token-help-dialog">
+    <tn-dialog-header>
+      <h2 class="h2" title="Collections">API tokens, the keys to your data</h2>
+    </tn-dialog-header>
+    <tn-dialog-body>
+      <div class="help-dialog__content">
+        <figure>
+          <img
+            class="help-dialog__illustration"
+            alt="Figure representing api tokens"
+            src="/images/undraw_safe.svg"
+          />
+        </figure>
+        <tn-p>
+          API tokens are for you to give secure access to your collections and devices, be it you
+          want to give access to just one collection or all collections at once. You can have as
+          many API tokens as you want.
+        </tn-p>
+      </div>
+    </tn-dialog-body>
+    <tn-dialog-footer>
+      <tn-button data-cy="api-token-help-dialog-cancel" flat click.delegate="cancel()"
+        >${cancelButtonText}</tn-button
+      >
+      <tn-button
+        data-cy="api-token-help-dialog-confirm"
+        focus-element
+        primary
+        raised
+        click.delegate="accept()"
+        >${acceptButtonText}</tn-button
+      >
+    </tn-dialog-footer>
+  </tn-dialog>
+</template>

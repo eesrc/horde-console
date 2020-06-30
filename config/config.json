@@ -1,0 +1,10 @@
+{
+  "name": "IoTAAS",
+  "version": "1.0",
+  "googleAnalytics": "UA-XXX-X",
+  "googleMaps": "AIzaXXXX",
+  "trackJs": {
+    "token": "XXXX",
+    "application": "ZZZZZ"
+  }
+}

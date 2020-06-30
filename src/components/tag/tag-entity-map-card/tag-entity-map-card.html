@@ -1,0 +1,23 @@
+<template>
+  <require from="./tag-entity-map-card.scss"></require>
+  <tn-card class="device-map">
+    <tn-card-body no-padding full-height>
+      <div if.bind="tagEntityMarkers.length === 0 && !updating" class="device-map__overlay">
+        <h3 class="h3">No map data</h3>
+      </div>
+      <google-map
+        latitude.bind="latitude"
+        longitude.bind="longitude"
+        markers.bind="tagEntityMarkers"
+        zoom="15"
+        map-click.delegate="mapClickEvent($event)"
+      ></google-map>
+      <div if.bind="updating" class="device-map__overlay device-map__overlay--help">
+        Click on the map where you want to place your marker.
+      </div>
+    </tn-card-body>
+    <tn-card-actions align-right>
+      <tn-button flat click.delegate="updateLocation()">Update location</tn-button>
+    </tn-card-actions>
+  </tn-card>
+</template>

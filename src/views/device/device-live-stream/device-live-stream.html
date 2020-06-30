@@ -1,0 +1,25 @@
+<template>
+  <require from="./device-stream-card/device-stream-card"></require>
+  <require from="./device-send-message-card/device-send-message-card"></require>
+  <require from="../device-heading.html"></require>
+  <require from="valueConverters/tagName"></require>
+  <main-container>
+    <device-heading
+      router.bind="router"
+      collection.bind="collection"
+      device.bind="device"
+    ></device-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item>
+          <device-send-message-card device.bind="device"></device-send-message-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row>
+        <tn-grid-item>
+          <device-stream-card device.bind="device"></device-stream-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

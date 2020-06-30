@@ -1,0 +1,31 @@
+@import "variables/grid";
+@import "mixins/responsive";
+@import "setup/typography";
+
+.form-field {
+  &__heading {
+    background-color: $font-color-secondary;
+  }
+}
+
+.output-dialog {
+  @include screen-min($tablet-break-min) {
+    &__form {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+
+  @include screen-min($tablet-break-max) {
+    &__output-selector {
+      border-right: solid 1px $font-color-dividers;
+    }
+  }
+
+  &__output-description {
+    margin: $grid-size * 2 0 $grid-size * 4 0;
+    color: $font-color-secondary;
+    font-size: $font-size--20;
+    font-weight: $font-weight--light;
+  }
+}

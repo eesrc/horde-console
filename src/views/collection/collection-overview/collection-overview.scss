@@ -1,0 +1,79 @@
+@import "setup/typography";
+@import "mixins/responsive";
+@import "variables/grid";
+@import "variables/colors";
+
+$collection-card-background-color: $color--telenor-blue;
+$collection-card-color: $font-color-primary--colored;
+
+.collections {
+  &__separator {
+    display: block;
+    width: 100%;
+    margin-bottom: $grid-size * 2;
+  }
+
+  &__separator-title {
+    color: $font-color-opacity--black-38;
+    font-size: $font-size--15;
+    font-weight: $font-weight--medium;
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.collection {
+  &__container {
+    position: relative;
+    width: 100%;
+
+    @include screen-min($tablet-break-min) {
+      width: auto;
+      margin-right: $grid-size * 2;
+    }
+  }
+}
+
+.collection-card {
+  display: inline-flex;
+  width: 100%;
+  height: 160px;
+  background-color: $collection-card-background-color;
+  color: $collection-card-color;
+
+  @include screen-min($tablet-break-min) {
+    width: 300px;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $collection-card-color;
+  }
+
+  &--new {
+    align-items: stretch;
+    background-color: $color--white;
+    color: $font-color-secondary;
+    cursor: pointer;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $font-color-secondary;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+  }
+
+  &__dropdown-title {
+    color: $collection-card-color;
+  }
+}

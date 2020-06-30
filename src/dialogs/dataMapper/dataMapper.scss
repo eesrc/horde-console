@@ -1,0 +1,8 @@
+@import "variables/colors";
+@import "variables/grid";
+
+.data-mapper {
+  padding: $grid-size * 1.5 $grid-size * 2;
+  border: solid 1px $color--google-grey-200;
+  background-color: $color-grey-theme--light;
+}

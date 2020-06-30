@@ -1,0 +1,42 @@
+<template>
+  <require from="components/common/range-chooser/range-chooser"></require>
+  <require from="./visualizations/line-visualization"></require>
+  <require from="./visualizations/map-visualization"></require>
+  <tn-card ref="cardElement">
+    <tn-card-header>
+      <tn-card-title>${dataMapperChain.name || "Unnamed mapper"}</tn-card-title>
+      <tn-card-header-actions>
+        <range-chooser selected-range.bind="selectedRange"></range-chooser>
+        <tn-button
+          show.bind="hasFullscreenCapability"
+          flat
+          icon
+          click.delegate="toggleFullscreen()"
+        >
+          <tn-icon>${ isFullscreen ? "fullscreen_exit" : "fullscreen"}</tn-icon>
+        </tn-button>
+      </tn-card-header-actions>
+    </tn-card-header>
+    <tn-card-body>
+      <div if.bind="visualizationType === 'graph'">
+        <line-visualization
+          devices.bind="devices"
+          message-data.bind="messageData"
+          data-mapper-chain.bind="dataMapperChain"
+        ></line-visualization>
+      </div>
+      <div if.bind="visualizationType === 'map'">
+        <map-visualization
+          bleed
+          data-mapper-chain.bind="dataMapperChain"
+          devices.bind="devices"
+          message-data.bind="messageData"
+        ></map-visualization>
+      </div>
+    </tn-card-body>
+    <tn-card-actions align-right>
+      <tn-button flat click.delegate="editVisualization()">Edit</tn-button>
+      <tn-button flat click.delegate="deleteVisualization()">Delete</tn-button>
+    </tn-card-actions>
+  </tn-card>
+</template>

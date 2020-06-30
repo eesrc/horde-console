@@ -1,0 +1,46 @@
+<template bindable="router, collection, device">
+  <require from="valueConverters/tagName"></require>
+  <tn-breadcrumb>
+    <tn-breadcrumb-item route="collection-overview" title="Collections"></tn-breadcrumb-item>
+    <tn-breadcrumb-item
+      route="collection-details"
+      params.bind="{ collectionId: collection.id }"
+      title="${ collection | tagName }"
+    ></tn-breadcrumb-item>
+    <tn-breadcrumb-item
+      route="collection-devices"
+      params.bind="{ collectionId: collection.id }"
+      title="Devices"
+    ></tn-breadcrumb-item>
+    <tn-breadcrumb-item title="${ device | tagName }"></tn-breadcrumb-item>
+  </tn-breadcrumb>
+  <h1 class="h1 h1--secondary">
+    ${ device | tagName }
+  </h1>
+  <tn-nav aria-label="Device navigation">
+    <tn-nav-item
+      title="Overview"
+      route="device-details"
+      params.bind="{ collectionId: device.collectionId, deviceId: device.id }"
+      active.bind="router.currentInstruction.config.name === 'device-details'"
+    ></tn-nav-item>
+    <tn-nav-item
+      title="Device data"
+      route="device-data"
+      params.bind="{ collectionId: device.collectionId, deviceId: device.id }"
+      active.bind="router.currentInstruction.config.name === 'device-data'"
+    ></tn-nav-item>
+    <tn-nav-item
+      title="Live stream"
+      route="device-live-stream"
+      params.bind="{ collectionId: device.collectionId, deviceId: device.id }"
+      active.bind="router.currentInstruction.config.name === 'device-live-stream'"
+    ></tn-nav-item>
+    <tn-nav-item
+      title="Firmware"
+      route="device-firmware"
+      params.bind="{ collectionId: device.collectionId, deviceId: device.id }"
+      active.bind="router.currentInstruction.config.name === 'device-firmware'"
+    ></tn-nav-item>
+  </tn-nav>
+</template>

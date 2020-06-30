@@ -1,0 +1,18 @@
+@import "setup/typography";
+
+.device-firmware {
+  &__details-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__detail-entry {
+    display: flex;
+  }
+
+  &__detail-key {
+    flex: 1;
+    font-weight: $font-weight--bold;
+  }
+}

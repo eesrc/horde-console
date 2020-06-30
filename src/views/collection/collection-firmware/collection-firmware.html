@@ -1,0 +1,123 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="../collection-heading.html"></require>
+  <require from="./collection-firmware-list-card/collection-firmware-list-card"></require>
+  <main-container>
+    <collection-heading router.bind="router" collection.bind="collection"></collection-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="6">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Firmware images for ${ collection | tagName }</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-p>
+                Firmware images is a natural part of the device lifecycle. Things change, needs
+                fixing, or simply has an improvement available. You can upload new firmware which
+                can in turn be used by every device in the collection. You'll be able to see the
+                different versions running on each device and see its state if it's updating to a
+                new one.
+              </tn-p>
+              <tn-p>
+                We're supporting Firmware Over The Air (FOTA) using Lightweight M2M (LwM2M). You can
+                read more about this on our
+                <a
+                  class="link link--colored"
+                  rel="noopener"
+                  target="_blank"
+                  href="https://blog.exploratory.engineering/post/something-in-the-air/"
+                  >blog</a
+                >
+                and read our
+                <a
+                  class="link link--colored"
+                  rel="noopener"
+                  target="_blank"
+                  href="https://docs.nbiot.engineering/api/firmware.html"
+                  >documentation</a
+                >
+                on how to use it on your device.
+              </tn-p>
+              <tn-p>
+                Add an image by clicking "Upload new firmware image" in the bottom right corner.
+              </tn-p>
+            </tn-card-body>
+            <tn-card-actions align-right>
+              <tn-button flat click.delegate="uploadNewFirmwareImage()"
+                >Upload new firmware image</tn-button
+              >
+            </tn-card-actions>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="6">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Firmware management for ${ collection | tagName }</tn-card-title>
+            </tn-card-header>
+            <tn-card-body>
+              <tn-p>
+                You must set the firmware management on the collection level to enable firmware
+                management in general. By default firmware management is turned off, but you can
+                select the different types in the dropdown below.
+              </tn-p>
+              <form>
+                <tn-select
+                  inline
+                  help-text="What kind of firmware management you want for the collection."
+                  label="Firmware setting for collection"
+                  name="collection-firmware-management-setting"
+                  value.bind="collection.firmware.management"
+                  values.bind="availableManagementTypes"
+                ></tn-select>
+                <tn-p if.bind="collection.firmware.management === 'disabled'">
+                  Firmware management is currently disabled. You can upload firmware, set firmware
+                  target versions on both collection and devices, but the firmware update will not
+                  be in effect.
+                </tn-p>
+                <tn-p if.bind="collection.firmware.management === 'collection'">
+                  Firmware management is set to collection level. The target version set on the
+                  collection will propagate to all devices in the collection.
+                </tn-p>
+                <tn-select
+                  if.bind="collection.firmware.management === 'collection'"
+                  inline
+                  help-text="The firmware image to be used for all devices in collection."
+                  label="Target firmware image for collection"
+                  name="collection-firmware-image"
+                  value.bind="collection.firmware.targetFirmwareId"
+                  values.bind="availableFirmwareImages"
+                ></tn-select>
+                <tn-p if.bind="collection.firmware.management === 'device'">
+                  Firmware management is set to device level. The target version set on the specific
+                  device will be set only for that device. Target version set on the collection will
+                  not be propagated to the devices.
+                </tn-p>
+                <tn-p
+                  if.bind="initialFirmwareManagement !== collection.firmware.management || initialFirmwareTargetId !== collection.firmware.targetFirmwareId"
+                >
+                  The setting is not in effect. Click the button below to apply the configuration
+                  <tn-button
+                    loading.bind="isLoading"
+                    primary
+                    click.delegate="updateCollectionFirmwareManagement()"
+                    >Update collection firmware management</tn-button
+                  >
+                </tn-p>
+              </form>
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row if.bind="firmwareImages.length > 0">
+        <tn-grid-item no-flex>
+          <collection-firmware-list-card
+            edit-firmware-image-callback.call="editFirmwareImage(firmwareImage)"
+            delete-firmware-image-callback.call="deleteFirmwareImage(firmwareImage)"
+            firmware-images.bind="firmwareImages"
+          ></collection-firmware-list-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

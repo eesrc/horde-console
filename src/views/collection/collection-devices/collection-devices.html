@@ -1,0 +1,21 @@
+<template>
+  <require from="valueConverters/tagName"></require>
+  <require from="valueConverters/stringify"></require>
+  <require from="../collection-heading.html"></require>
+  <require from="./collection-device-list-card/collection-device-list-card"></require>
+  <main-container>
+    <collection-heading router.bind="router" collection.bind="collection"></collection-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="12">
+          <collection-device-list-card
+            create-callback.call="createDevice()"
+            delete-callback.call="deleteDevice(device)"
+            collection.bind="collection"
+            devices.bind="devices"
+          ></collection-device-list-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>

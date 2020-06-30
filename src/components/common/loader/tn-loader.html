@@ -1,0 +1,19 @@
+<template>
+  <div
+    if.bind="showLoader && hasProp('contain')"
+    class="tn-loader__padder ${ loading ? 'tn-loader__padder--expanded' : '' }"
+  ></div>
+  <div
+    if.bind="showLoader"
+    class="
+  tn-loader
+  ${ loading ? 'tn-loader--visible' : '' }
+  ${ hasProp('contain') ? 'tn-loader--contain' : '' }
+  "
+  >
+    <span class="tn-loader__spinner" if.bind="hasProp('spinner')">
+      <tn-spinner large></tn-spinner>
+    </span>
+    <span if.bind="loadingText" class="tn-loader__text">${ loadingText }</span>
+  </div>
+</template>

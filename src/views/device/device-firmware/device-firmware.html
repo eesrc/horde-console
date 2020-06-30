@@ -1,0 +1,163 @@
+<template>
+  <require from="../device-heading.html"></require>
+  <require from="valueConverters/tagName"></require>
+  <require from="./device-firmware.scss"></require>
+  <main-container>
+    <device-heading
+      router.bind="router"
+      device.bind="device"
+      collection.bind="collection"
+    ></device-heading>
+    <tn-grid>
+      <tn-grid-row>
+        <tn-grid-item grid-size="4">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title>Device firmware management</tn-card-title></tn-card-header
+            >
+            <tn-card-body>
+              <tn-p>
+                Here you can manage your device firmware by using firmwares connected to its
+                collection. To upload a new firmware go to the
+                <a
+                  class="link link--colored"
+                  route-href="route: collection-firmware; params.bind: { collectionId: collection.id }"
+                  >collection firmware</a
+                >.
+              </tn-p>
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="4">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title
+                >Firmware status for ${ device | tagName }</tn-card-title
+              ></tn-card-header
+            >
+            <tn-card-body>
+              <tn-p>
+                The current firmware state for the device is: <em>${ device.firmware.state }</em>
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Unknown'">
+                If the device firmware state is unknown, it might be because the device has yet to
+                be configured with a firmware target or is in a transition to be updated.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Initializing'">
+                If the device firmware state is initializing, the device is in the process of
+                negotiating which firmware to use.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Pending'">
+                The device is pending instructions for a new firmware image.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Current'">
+                If the device firmware state is current, the device has reached its current target
+                firmware image.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Downloading'">
+                The device is currently downloading a new firmware image.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Completed'">
+                The device has completed downloading a new firmware image.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'UpdateFailed'">
+                The device failed to install the new firmware image.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'TimedOut'">
+                The device timed out when trying to install the new firmware image.
+              </tn-p>
+              <tn-p if.bind="device.firmware.state === 'Reverted'">
+                The device has reverted to a prior firmware image.
+              </tn-p>
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+        <tn-grid-item grid-size="4">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title
+                >Firmware details for ${ device | tagName }</tn-card-title
+              ></tn-card-header
+            >
+            <tn-card-body>
+              <ul class="device-firmware__details-list">
+                <li class="device-firmware__detail-entry" repeat.for="entry of extraDetails">
+                  <span class="device-firmware__detail-key">${entry.key}</span>${entry.value}
+                </li>
+              </ul>
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+      </tn-grid-row>
+      <tn-grid-row>
+        <tn-grid-item grid-size="12">
+          <tn-card>
+            <tn-card-header>
+              <tn-card-title
+                >Firmware configuration for ${ device | tagName }</tn-card-title
+              ></tn-card-header
+            >
+            <tn-card-body>
+              <tn-p if.bind="collection.firmware.management === 'device'">
+                The current collection firmware management is set to <b>device</b>. This means that
+                you can set the firmware on the individual device level, meaning devices within the
+                collection can have different firmware images running.
+              </tn-p>
+              <tn-p if.bind="collection.firmware.management === 'collection'">
+                The current collection firmware management is set to <b>collection</b>. This means
+                that all devices is running the same firmware image and is set on the collection
+                level. To set the image, go to
+                <a
+                  class="link link--colored"
+                  route-href="route: collection-firmware; params.bind: { collectionId: collection.id }"
+                  >collection firmware</a
+                >
+                and select the firmware you want to be running on your devices.
+              </tn-p>
+              <tn-p if.bind="collection.firmware.management === 'disabled'">
+                The current collection firmware management is set to <b>disabled</b>. You can still
+                set a target version for the device, but it won't have any effect until the firmware
+                management is set to <b>device</b>. To change the collection firmware management
+                setting, go to
+                <a
+                  class="link link--colored"
+                  route-href="route: collection-firmware; params.bind: { collectionId: collection.id }"
+                  >collection firmware</a
+                >
+                and change the management type.
+              </tn-p>
+              <form
+                class="form"
+                if.bind="availableFirmwareImages.length > 0 && (collection.firmware.management === 'device' || collection.firmware.management === 'disabled')"
+              >
+                <tn-p if.bind="initialFirmwareTargetId === ''">
+                  The device does not have a target firmware set yet. To set a target firmware,
+                  choose one from the dropdown below and click update device firmware management.
+                </tn-p>
+                <tn-select
+                  inline
+                  help-text="The firmware image to be used for this device."
+                  label="Target firmware image for device"
+                  name="device-firmware-image"
+                  value.bind="device.firmware.targetFirmwareId"
+                  values.bind="availableFirmwareImages"
+                ></tn-select>
+                <tn-p if.bind="initialFirmwareTargetId !== device.firmware.targetFirmwareId">
+                  The setting is not in effect. Click the button below to apply the configuration
+                </tn-p>
+                <tn-p if.bind="initialFirmwareTargetId !== device.firmware.targetFirmwareId">
+                  <tn-button
+                    loading.bind="isLoading"
+                    primary
+                    click.delegate="updateDeviceFirmwareTarget()"
+                    >Update device target firmware</tn-button
+                  >
+                </tn-p>
+              </form>
+            </tn-card-body>
+          </tn-card>
+        </tn-grid-item>
+      </tn-grid-row>
+    </tn-grid>
+  </main-container>
+</template>
